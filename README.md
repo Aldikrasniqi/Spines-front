@@ -1,24 +1,24 @@
 # spines-front
 
-## Project Setup
+## Project Setup 
 
 ```sh
-npm install
+cd root-of-your-project
 ```
 
-### Compile and Hot-Reload for Development
+### Build docker image of vue application
 
 ```sh
-npm run dev
+docker build -t spines-frontend .
 ```
 
-### Type-Check, Compile and Minify for Production
+### Run vue application in the docker container
 
 ```sh
-npm run build
+docker run -it -p 8080:8080 --rm --name spines-orchestration-frontend spines-frontend
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+<!-- ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
 npm run test:unit
@@ -41,4 +41,4 @@ npm run test:e2e -- --project=chromium
 npm run test:e2e -- tests/example.spec.ts
 # Runs the tests in debug mode
 npm run test:e2e -- --debug
-```
+``` -->
