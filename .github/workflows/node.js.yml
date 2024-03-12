@@ -30,4 +30,6 @@ jobs:
     - run: npm run build --if-present
     - run: npm run test:unit
     - run: npm run type-check
-   
+   # build to vercel
+   deploy:
+     
