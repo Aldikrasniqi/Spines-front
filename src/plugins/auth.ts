@@ -1,6 +1,7 @@
-// auth store
+// 
 export default {
-    install: ({ config: any }, callback: any) => {
-      
+    install: ({ config } : any, callback: any) => {
+        return config;
     },
+    
   };
