@@ -3,7 +3,7 @@ import { expect, describe, test } from "vitest";
 
 describe('loadUserDetails', () => {
     test('should load user details', async () => {
-        const user = await loadUserData('Aldiq');
+        const user = await loadUserData('Aldi');
         expect(user).toEqual({
             name: 'Aldi',
             age: 18,
