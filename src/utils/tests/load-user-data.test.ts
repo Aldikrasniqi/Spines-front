@@ -1,4 +1,4 @@
-import { loadUserData } from "./load-user-data";
+import { loadUserData } from "../load-user-data";
 import { expect, describe, test } from "vitest";
 
 describe('loadUserDetails', () => {

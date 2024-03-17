@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 defineProps<{
   msg: string
 }>()
@@ -11,6 +13,10 @@ defineProps<{
       You’ve successfully created a project with
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
+
+      <div>
+        <FontAwesomeIcon :icon="faPhone" /> Call us at 1-800-555-1234
+      </div>
     </h3>
   </div>
 </template>
