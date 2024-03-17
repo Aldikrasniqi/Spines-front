@@ -1,29 +1,48 @@
 // tailwind.config.js
+const { fontFamily } = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: true, // or 'media' or 'class'
   theme: {
     screens: {
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
       '2xl': '1536px',
     },
     colors: {
-      // testing colors
-      'blue': '#1fb6ff',
-      'purple': '#7e5bef',
-      'pink': '#ff49db',
-      'orange': '#ff7849',
-      'green': '#13ce66',
-      'yellow': '#ffc82c',
-      'gray-dark': '#273444',
-      'gray': '#8492a6',
-      'gray-light': '#d3dce6',
+      blue: '#0146B1',
+      'dark-blue': '#0038F0F0',
+      'light-blue': '#299DF2',
+      green: '#00A79D',
+      'dark-green': '#B3FE4A',
+      'light-black' : '#131517',
+      'dark-gray': '#24272D',
+      gray: '##6E7175',
+      purple: '#966AF5',
+      white: '#FFFFFF',
+      black: '#000000',
+      'silver' : '#E4EEFC',
+      'light-silver': '#F3F7FA',
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
+      sans: [
+        '"Inter"',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
       serif: ['Merriweather', 'serif'],
     },
     extend: {
@@ -36,11 +55,11 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2rem',
-      }
+      },
     },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
