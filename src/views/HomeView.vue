@@ -4,7 +4,7 @@
 <template>
   <main class="lg-2xl">
     <h1 class="text-lg font-bold text-green">
-      Home
+      Talents
     </h1>
   </main>
 </template>

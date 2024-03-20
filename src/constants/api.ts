@@ -1,1 +1,1 @@
-export const API_URL = 'https://cloud-api.liftyourbrand.de/api';
+export const API_URL = 'https://localhost:8080';
