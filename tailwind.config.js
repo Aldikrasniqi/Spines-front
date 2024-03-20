@@ -1,8 +1,8 @@
 // tailwind.config.js
-const { fontFamily } = require('tailwindcss/defaultTheme')
+const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: true, // or 'media' or 'class'
+  darkMode: true,
   theme: {
     screens: {
       sm: '640px',
@@ -15,20 +15,24 @@ module.exports = {
       blue: '#0146B1',
       'dark-blue': '#0038F0F0',
       'light-blue': '#299DF2',
+      'ex-light-blue': '#0062FF',
       green: '#00A79D',
       'dark-green': '#B3FE4A',
-      'light-black' : '#131517',
+      gray: '#6E7175',
       'dark-gray': '#24272D',
-      gray: '##6E7175',
+      'light-gray': '#d3d3d3',
       purple: '#966AF5',
       white: '#FFFFFF',
       black: '#000000',
-      'silver' : '#E4EEFC',
+      'light-black': '#131517',
+      silver: '#E4EEFC',
       'light-silver': '#F3F7FA',
+      'field-error': '#FF0000',
     },
     fontFamily: {
       sans: [
         '"Inter"',
+        'Poppins',
         'system-ui',
         '-apple-system',
         'BlinkMacSystemFont',
@@ -43,7 +47,25 @@ module.exports = {
         '"Segoe UI Symbol"',
         '"Noto Color Emoji"',
       ],
-      serif: ['Merriweather', 'serif'],
+      serif: [
+        'Merriweather',
+        'ui-serif',
+        'Georgia',
+        'Cambria',
+        'Times New Roman',
+        'Times',
+        'serif',
+      ],
+      mono: [
+        'ui-monospace',
+        'SFMono-Regular',
+        'Menlo',
+        'Monaco',
+        'Consolas',
+        '"Liberation Mono"',
+        '"Courier New"',
+        'monospace',
+      ]
     },
     extend: {
       spacing: {

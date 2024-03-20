@@ -5,7 +5,7 @@ import router from '@/router';
 const token = localStorage.getItem('token');
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: process.env.API_URL || API_URL,
   headers: {
     ...(token && { Authorization: `Bearer ${token}` }),
   },
