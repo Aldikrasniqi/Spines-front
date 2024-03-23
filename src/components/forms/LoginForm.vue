@@ -10,17 +10,18 @@
         placeholder="Your Email"
         autocomplete="on"
         v-model="auth.LoginCredentials.email"
+        @keyup="auth.validateEmail(auth.LoginCredentials.email, 'loginErrors')"
+        @focusout="auth.validateEmail(auth.LoginCredentials.email, 'loginErrors')"
       />
       <FontAwesomeIcon
         :icon="faUser"
         class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray"
       />
     </div>
-    <div class="text-field-error mb-5 ml-2 text-sm">
-      {{ 
-          auth.loginErrors.email ? auth.loginErrors.email : ''
-      }}
-    </div>
+    <FieldError
+      :error="auth.loginErrors.email"
+      :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
+    />
 
     <div class="relative flex items-center">
       <input
@@ -31,20 +32,25 @@
         placeholder="Your Password"
         autocomplete="on"
         v-model="auth.LoginCredentials.password"
+        @keyup="auth.validatePassword(auth.LoginCredentials.password, 'loginErrors')"
       />
       <FontAwesomeIcon
         :icon="faLock"
         class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray"
       />
     </div>
-    <div class="text-field-error mb-5 ml-2 text-sm">
-      {{ 
-          auth.loginErrors.password ? auth.loginErrors.password : ''
-      }}
-    </div>
-    <div class="w-full bg-ex-light-blue text-center p-2 rounded-lg mb-3">
-      <button type="submit" class="text-white w-full">Login</button>
-    </div>
+
+    <FieldError
+      :error="auth.loginErrors.password"
+      :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
+    />
+
+    <button
+      type="submit"
+      class="text-white w-full bg-ex-light-blue text-center p-2 rounded-lg mb-2 hover:bg-dark-blue"
+    >
+      Login
+    </button>
   </form>
   <div class="w-full mb-4 text-end pr-2">
     <router-link
@@ -58,7 +64,7 @@
     <h1 class="p-4 text-gray text-lg font-mediuma">or</h1>
     <hr class="w-1/2 text-light-gray" />
   </div>
-  <div class="flex items-center gap-2 justify-between mb-4">
+  <div class="flex items-center gap-2 lg:justify-between justify-around mb-4">
     <facebookbutton />
     <googlebutton />
   </div>
@@ -70,7 +76,7 @@
         class="text-ex-light-blue font-sans font-medium text-sm"
         >Register</router-link
       >
-    </p>    
+    </p>
   </div>
 </template>
 
@@ -80,14 +86,12 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import facebookbutton from '@/components/buttons/facebookButton.vue';
 import googlebutton from '@/components/buttons/googleButton.vue';
 import { useAuthStore } from '@/stores/useAuth';
+import FieldError from '@/components/FieldError.vue';
+
 const auth = useAuthStore();
 
 const submitLogin = async () => {
-
-    auth.login(
-        auth.LoginCredentials
-    );
-    console.log('success login');
+  auth.loginUser(auth.LoginCredentials);
 };
 </script>
 <style scoped></style>
