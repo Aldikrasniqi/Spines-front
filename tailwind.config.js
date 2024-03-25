@@ -1,7 +1,8 @@
 // tailwind.config.js
-const { fontFamily } = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}', "./node_modules/vue-tailwind-datepicker/**/*.js",],
   darkMode: true,
   theme: {
     screens: {
@@ -12,6 +13,7 @@ module.exports = {
       '2xl': '1536px',
     },
     colors: {
+      'primary': '#2F6AD8',
       blue: '#0146B1',
       'dark-blue': '#0038F0F0',
       'light-blue': '#299DF2',
@@ -28,25 +30,10 @@ module.exports = {
       silver: '#E4EEFC',
       'light-silver': '#F3F7FA',
       'field-error': '#FF0000',
+      
     },
     fontFamily: {
-      sans: [
-        '"Inter"',
-        'Poppins',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
+      'sans': ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
       serif: [
         'Merriweather',
         'ui-serif',
@@ -77,6 +64,9 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2rem',
+      },
+      lineHeight: {
+        12: '3.2  rem',
       },
     },
   },

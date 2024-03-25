@@ -39,7 +39,7 @@ import { ref } from 'vue';
 import { registerTabs } from '../../constants/general';
 import RegisterUserForm from './UserRegisterForm.vue';
 import RegisterCompanyForm from './CompanyRegisterForm.vue';
-const activeTab = ref('company');
+const activeTab = ref('user');
 const setActiveTab = (tab: string) => {
   activeTab.value = tab;
 };

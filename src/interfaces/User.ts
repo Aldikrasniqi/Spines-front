@@ -4,7 +4,8 @@ export interface User {
   last_name: string;
   email: string;
   avatar: string;
-  role: string;
+  roles: string[]
+  birthdate: string;
   token: string;
   createdAt: string;
   updatedAt: string;
