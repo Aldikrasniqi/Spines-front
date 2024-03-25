@@ -1,6 +1,6 @@
 <template>
-    <div class="lg:flex md:flex w-full h-screen items-start mt-32 justify-between gap-2 p-2">
-        <div class="lg:w-2/5 mt-20">
+    <div class="lg:flex md:flex w-full h-screen items-center justify-between gap-2 p-2 max-w-6xl mx-auto">
+        <div class="lg:w-2/5">
             <RegisterForm />
         </div>
         <div class="lg:w-1/2">
