@@ -33,6 +33,7 @@
         autocomplete="on"
         v-model="auth.LoginCredentials.password"
         @keyup="auth.validatePassword(auth.LoginCredentials.password, 'loginErrors')"
+        @focusout="auth.validatePassword(auth.LoginCredentials.password, 'loginErrors')"
       />
       <FontAwesomeIcon
         :icon="faLock"
@@ -89,7 +90,6 @@ import { useAuthStore } from '@/stores/useAuth';
 import FieldError from '@/components/FieldError.vue';
 
 const auth = useAuthStore();
-
 const submitLogin = async () => {
   auth.loginUser(auth.LoginCredentials);
 };

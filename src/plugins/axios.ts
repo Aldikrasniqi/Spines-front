@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
     ...(token && { Authorization: `Bearer ${token}` }),
   },
 });
-
+    
 const onRequest = (config: any) => {
   if (!config.headers['Authorization']) {
     config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;

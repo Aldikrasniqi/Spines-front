@@ -1,10 +1,12 @@
-<script setup lang="ts">
-</script>
-
-<template>
-  <main class="lg-2xl">
-    <h1 class="text-lg font-bold text-green">
-      Talents
-    </h1>
+    <template>
+  <main>
+    <Header />
+    <Partners />
   </main>
+  
+  
 </template>
+<script setup lang="ts">
+import Header from '@/components/home/Header.vue';
+import Partners from '@/components/home/Partners.vue';
+</script>
