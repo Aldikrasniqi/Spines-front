@@ -1,13 +1,28 @@
 import './assets/index.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
+// layouts
+import authLayout from '@/layouts/auth.vue';
+import mainLayout from '@/layouts/main.vue';
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+import auth from "./plugins/auth";
 
-app.use(createPinia())
-app.use(router)
+// const pinia = createPinia()
 
-app.mount('#app')
+const initApp = () => {
+    console.log('initApp auth');
+}
+
+// const app = createApp(App)
+
+// app.use(pinia)
+// .use(auth, initApp)
+createApp(App)
+    .use(createPinia())
+    .use(router)
+    .use(auth, initApp)
+    .component('auth', authLayout)
+    .component('main', mainLayout)
+    .mount('#app')

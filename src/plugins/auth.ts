@@ -1,7 +1,13 @@
-// 
+import { useAuthStore } from "@/stores/useAuth";
+
 export default {
     install: ({ config } : any, callback: any) => {
-        return config;
+        config.globalProperties.$auth = useAuthStore();
+
+        if (useAuthStore().isLoggedIn) {
+          console.log('User is logged in');
+           callback();
+          }
+        else callback();
     },
-    
   };

@@ -1,4 +1,4 @@
-    <template>
+  <template>
   <main>
     <Header />
     <Partners />
@@ -9,4 +9,5 @@
 <script setup lang="ts">
 import Header from '@/components/home/Header.vue';
 import Partners from '@/components/home/Partners.vue';
+
 </script>
