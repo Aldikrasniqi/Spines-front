@@ -5,17 +5,17 @@ import type {
   RegisterCredentials,
   RegisterCompanyCredentials,
 } from '@/interfaces/User';
-import { login, registerUser, registerCompany } from '@/services/authService';
+import { login, registerUser, registerCompany,fetchUserData } from '@/services/authService';
 import { EMAIL_REGEX, PASSWORD_REGEX, PHONE_REGEX } from '@/constants/regex';
 import axiosInstance from '@/plugins/axios';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     // init state here
+    loggedIn: localStorage.getItem("token") ? true : false,
     user: {} as User,
     LoginCredentials: {} as LoginCredentials,
     RegisterCredentials: {} as RegisterCredentials,
     RegisterCompanyCredentials: {} as RegisterCompanyCredentials,
-    isLoggedIn: false,
     loginErrors: {} as any,
     registerUserErrors: {} as any,
     registerCompanyErrors: {} as any,
@@ -25,16 +25,16 @@ export const useAuthStore = defineStore('auth', {
     // user: (state) => state.user,
     // userName: (state) => state.user?.first_name + ' ' + state.user?.last_name,
     // roles: (state) => state.user && state.user.role ? state.user.role.split(',') : [],
-    LoggedIn: (state) => state.isLoggedIn,
+    isLoggedIn: (state) => state.loggedIn,
   },
   actions: {
     // methods to update state
     async registerUser(credentials: RegisterCredentials) {
       this.registerUserErrors = {};
-      if (!credentials.first_name) {
+      if (!credentials.firstName) {
         this.registerUserErrors.name = 'First name is required';
       }
-      if(!credentials.last_name){
+      if(!credentials.lastName){
         this.registerUserErrors.last_name = 'Last name is required';
       }
       if (!credentials.email) {
@@ -48,11 +48,11 @@ export const useAuthStore = defineStore('auth', {
       } else if(!PASSWORD_REGEX.test(credentials.password!)){
         this.registerUserErrors.password = 'Please enter a valid password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.';
       }
-      if(!credentials.password_confirmation){
-        this.registerUserErrors.password_confirmation = 'Password confirmation is required';
-      } else if(credentials.password !== credentials.password_confirmation){
-        this.registerUserErrors.password_confirmation = 'Passwords do not match';
-      }
+      // if(!credentials.password_confirmation){
+      //   this.registerUserErrors.password_confirmation = 'Password confirmation is required';
+      // } else if(credentials.password !== credentials.password_confirmation){
+      //   this.registerUserErrors.password_confirmation = 'Passwords do not match';
+      // }
       
       if(credentials.birthdate){
         const today = new Date();
@@ -128,42 +128,56 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async loginUser(credentials: LoginCredentials) {
-      this.loginErrors = {};
-      if (!credentials.email) {
-        this.loginErrors.email = 'Email is required';
-      }
-      if (!EMAIL_REGEX.test(credentials.email)) {
-        this.loginErrors.email = 'Email is invalid';
-      }
+      // this.loginErrors = {};
+      // if (!credentials.email) {
+      //   this.loginErrors.email = 'Email is required';
+      // }
+      // if (!EMAIL_REGEX.test(credentials.email)) {
+      //   this.loginErrors.email = 'Email is invalid';
+      // }
 
-      if (!credentials.password) {
-        this.loginErrors.password = 'Password is required';
-      }
-      if (!PASSWORD_REGEX.test(credentials.password)) {
-        this.loginErrors.password =
-          'Please enter a valid password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.';
-      }
-      if (Object.keys(this.loginErrors).length) {
-        return;
-      }
-      this.loginErrors = {};
-
+      // if (!credentials.password) {
+      //   this.loginErrors.password = 'Password is required';
+      // }
+      // if (!PASSWORD_REGEX.test(credentials.password)) {
+      //   this.loginErrors.password =
+      //     'Please enter a valid password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.';
+      // }
+      // if (Object.keys(this.loginErrors).length) {
+      //   return;
+      // }
+      // this.loginErrors = {};
       try {
         const response = await login(credentials);
         console.log(response);
-        if(response && response.data && response.data.token){
-          console.log(true);
-          localStorage.setItem('token', response.data.token);
-          this.isLoggedIn = true;
-          axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-          this.user = response.data.user
-          this.user.roles = response.roles ? response.roles : ['user'];
-          // window.location.href = '/profile';
+        if(response){
+          const token = `Bearer ${response.access_token}`
+          localStorage.setItem('token', token);
+          axiosInstance.defaults.headers.common['Authorization'] = token;
+          this.loggedIn = true;
+
+          // this.user = response.data.user
+          // this.user.roles = response.roles ? response.roles : ['user'];
+          window.location.href = '/dashboard';
         } 
         return response;
       } catch (error) {
         console.log(error);
         return error;
+      }
+    },
+    async logout() {
+      this.user = {} as User;
+      window.location.href = '/';
+      localStorage.removeItem('token');
+    },
+    async getUser() {
+      const usr = await fetchUserData();
+      if (usr) {
+        this.loggedIn = true;
+        this.user = usr;
+      } else {
+        this.logout();
       }
     },
     validateEmail(email: string, type: string) {

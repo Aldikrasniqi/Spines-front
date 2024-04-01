@@ -88,10 +88,17 @@ import facebookbutton from '@/components/buttons/facebookButton.vue';
 import googlebutton from '@/components/buttons/googleButton.vue';
 import { useAuthStore } from '@/stores/useAuth';
 import FieldError from '@/components/FieldError.vue';
+import { onMounted } from 'vue';
 
 const auth = useAuthStore();
 const submitLogin = async () => {
   auth.loginUser(auth.LoginCredentials);
 };
+onMounted(() => {
+  auth.LoginCredentials = {
+    email: 'john.doe@example.com',
+    password: 'Password123!',
+  };
+});
 </script>
 <style scoped></style>

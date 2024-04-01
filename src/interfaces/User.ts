@@ -1,14 +1,14 @@
 export interface User {
-  id: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  avatar: string;
-  roles: string[]
-  birthdate: string;
-  token: string;
-  createdAt: string;
-  updatedAt: string;
+  id?: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  avatar?: string;
+  roles?: string[]
+  birthdate?: string;
+  token?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface LoginCredentials {
@@ -16,8 +16,8 @@ export interface LoginCredentials {
   password: string;
 }
 export interface RegisterCredentials {
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   birthdate?: string;
   password?: string;

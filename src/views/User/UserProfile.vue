@@ -1,10 +1,17 @@
+
 <template>
     <div>
         <h1>User Profile</h1>
-        <p>{{ user }}</p>
+        <div>
+            <p>Name: {{ props.data.first_name }}</p>
+            <p>Email: {{ props.data.email }}</p>
+            <p>Roles: {{ props.data.roles}}</p>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-const user = ref('John Doe')
+import type { User } from '../../interfaces/User';
+const props = defineProps<{
+    data: User
+}>();
 </script>
