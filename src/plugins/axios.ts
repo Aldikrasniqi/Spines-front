@@ -3,18 +3,20 @@ import { API_URL } from '@/constants/api';
 import router from '@/router';
 
 const token = localStorage.getItem('token');
-
+axios.defaults.baseURL = API_URL;
 const axiosInstance = axios.create({
-  baseURL: process.env.API_URL || API_URL,
+  baseURL: API_URL,
   headers: {
-    ...(token && { Authorization: `Bearer ${token}` }),
+    ...token && { 'Authorization': `Bearer ${token}` },
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
-});
+})
     
 const onRequest = (config: any) => {
   if (!config.headers['Authorization']) {
-    config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-  }
+    config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+  };
   return config;
 };
 
@@ -33,6 +35,7 @@ axiosInstance.interceptors.response.use(
               name: 'notfound',
               params: {code: 403},
           });
+          
           break;
         default:
           console.log(error.response.data);

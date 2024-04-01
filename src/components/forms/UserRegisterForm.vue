@@ -9,16 +9,16 @@
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
           placeholder="Your First Name"
           autocomplete="on"
-          v-model="auth.RegisterCredentials.first_name"
+          v-model="auth.RegisterCredentials.firstName"
           @keyup="
             auth.validateName(
-              auth.RegisterCredentials.first_name!,
+              auth.RegisterCredentials.firstName!,
               'registerUserErrors'
             )
           "
           @focusout="
             auth.validateName(
-              auth.RegisterCredentials.first_name!,
+              auth.RegisterCredentials.firstName!,
               'registerUserErrors'
             )
           "
@@ -40,16 +40,16 @@
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
           placeholder="Last name"
           autocomplete="on"
-          v-model="auth.RegisterCredentials.last_name"
+          v-model="auth.RegisterCredentials.lastName"
           @keyup="
             auth.validateLastName(
-              auth.RegisterCredentials.last_name!,
+              auth.RegisterCredentials.lastName!,
               'registerUserErrors'
             )
           "
           @focusout="
             auth.validateLastName(
-              auth.RegisterCredentials.last_name!,
+              auth.RegisterCredentials.lastName!,
               'registerUserErrors'
             )
           "
@@ -125,7 +125,7 @@
         :error="auth.registerUserErrors.password"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
       />
-      <div class="relative flex items-cneter">
+      <!-- <div class="relative flex items-cneter">
         <input
           type="password"
           id="confirmPassword"
@@ -153,7 +153,7 @@
           :icon="faUser"
           class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray"
         />
-      </div>
+      </div> -->
       <FieldError
         :error="auth.registerUserErrors.password_confirmation"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
