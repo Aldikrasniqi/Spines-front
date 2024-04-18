@@ -37,11 +37,11 @@
       <div class="w-full ">
        <div class="flex flex-row-reverse relative">
         <img
-          src="https://s3-alpha-sig.figma.com/img/ebbd/78e6/c042ceab8b8404d2a015f0122935ea2f?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mK7QBCl5pqNThmgZnluQK-PajT6JuwNxuyg13qPf4blcVLSLe~5lGF9w3Wvn9~6EdjPEfhBSQuY-vgkBeqoMfFFQiNX5tELp3VmusrDR2QHmxu4VmojRAArb~J5KrB63DkntlqdhxnBMePw4T3uZrUBDQ2HIS90IVYsjt2Ahqtavnz7yePWTr5shs-upxNbLUtdK8lCefuXFuR~MsSb5yAkaUwxT~bypcSsUNh595UHZbo4takU-RFDgI1TpzQgc6xpLclfzDqO9rIznVLEUInfLDK5oj6FO5tDXuboiqB2Ia8XmpudHOBpfI7NPlG80VldMAMTM6V40wze9GEKOSg__"
+          src="https://s3-alpha-sig.figma.com/img/ebbd/78e6/c042ceab8b8404d2a015f0122935ea2f?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jDDjQdGl0z9ZltipwACUeBBqHHkWUECl51u9yOKP-znG55OIGMbMTkCB5sbjVJsske-xAM9Dc8uIwNGTCwZFkpyx74wgy9AMwGDWXU2BOBHJlCutYds3zgmyfsJ8gy~nx4EQr2Q-RNISm7d7P6rp1EcXkcO-Xtv1HNSUeXqEW7Y6CjbheNOgD-lCJmdOSZD3JpSP41H1RD~egYf8H99x1CTr7k70QcsM3h9RdA4Z7mRnyFUJKWTcnxo3X8X25nKMSTlTF3RAV5r7VmUos8gxwlSHdrqm-rhltvNJGA1bqMuv4nJ2Za2AhbLXzaCFKWh-njPfdrAuHOSRnR37CDw~Lg__"
           alt="hero"
           class="w-full h-full object-cover translate-x-4 translate-y-14"
         />
-        <div class="card absolute translate-y-32 -translate-x-4 right-10 bg-white z-100 rounded-lg px-10 py-6 shadow-xl flex flex-col items-center">
+        <div class="card absolute translate-y-32 -translate-x-4 right-10 bg-whitfig z-100 rounded-lg px-10 py-6 shadow-xl flex flex-col items-center">
           <h1 class="font-bold text-xl">30K+ 💼</h1>
           <p>People got hired</p>
        </div>
