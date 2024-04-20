@@ -1,5 +1,5 @@
 <template>
-    <main class="lg-2xl h-[550px] flex items-center overflow-hidden max-w-6xl mx-auto">
+    <main class="lg-2xl h-[550px] flex items-center overflow-hidden">
       <div class="w-[800px]">
         <div class="flex items-center gap-4 mb-4">
           <label class="inline-flex items-center cursor-pointer justify-center">
@@ -55,4 +55,6 @@
   <script setup lang="ts">
   import { usersProfileTabs } from '../../constants/general';
   </script>
-  
+<style>
+
+</style>
