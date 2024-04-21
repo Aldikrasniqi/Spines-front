@@ -1,6 +1,6 @@
 <template>
-    <div class="h-[400px] bg-white ">
-        <div class="max-w-6xl mx-auto flex flex-col items-center justify-center text-center pt-10">
+    <div class="h-[300px] max-w-full bg-white">
+        <div class="flex max-w-6xl mx-auto flex-col items-center justify-center text-center pt-10">
             <div class="flex flex-col justify-center text-center">
                 <h1 class="text-3xl font-bold text-blue">Our Partners</h1>
                 <p class="text-gray text-lg font-medium">Trusted by 4,000+ companies</p>
