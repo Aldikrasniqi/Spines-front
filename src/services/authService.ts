@@ -68,3 +68,13 @@ export async function logout() {
     throw error;
   }
 }
+export async function fetchUserById(id: string) {
+  try {
+
+    const response = (await axiosInstance.get(`${API_URL
+    }/user/${id}`)).data;
+    return response;
+  } catch (error) {
+    return null;
+  }
+}

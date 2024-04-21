@@ -1,7 +1,7 @@
 <template>
     <!-- @vue-ignore -->
    <div v-if="$auth.loggedIn">
-    <div  >
+    <div>
         <ul class="flex gap-4 mb-10 justify-between w-[400px] items-center" >
             <li v-for="p,i in userMenu" class="
             underline-none 
@@ -15,8 +15,6 @@
        
     </div>
         <UserProfile :data="userData" />
-        
-        
    </div>
     <div
     v-else
