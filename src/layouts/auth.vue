@@ -1,6 +1,6 @@
 <template>
     <div class="header__style">
-        <div class="max-w-6xl mx-auto">
+        <div class="">
             <NavigationBar />
             <slot />
         </div>

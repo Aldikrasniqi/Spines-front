@@ -1,5 +1,5 @@
 <template>
-    <main class="lg-2xl h-[550px] flex items-center overflow-hidden">
+    <main class="lg-2xl h-[550px] max-w-6xl mx-auto flex items-center overflow-hidden">
       <div class="w-[800px]">
         <div class="flex items-center gap-4 mb-4">
           <label class="inline-flex items-center cursor-pointer justify-center">

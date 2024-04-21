@@ -1,6 +1,7 @@
 <template>
-    <main class="h-[400px] bg-white">
-      <div class="flex flex-row flex-wrap justify-between items-center">
+    <main class="h-[400px] max-w-full bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-row flex-wrap justify-between items-center">
         <h1 class="text-3xl text-black font-bold">
           <span class="text-blue">Latest</span> Job Opportunities
         </h1>
@@ -44,6 +45,7 @@
             :maxSalary="selectedOpportunity.maxSalary"
           />
         </div>
+      </div>
       </div>
     </main>
   </template>

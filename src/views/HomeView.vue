@@ -1,9 +1,9 @@
   <template>
-
+  <main class="">
     <Header />
     <Partners />
     <Opportunities />
-
+  </main>
 </template>
 <script setup lang="ts">
 import Header from '@/components/home/Header.vue';
