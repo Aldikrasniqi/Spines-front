@@ -1,6 +1,6 @@
 <template>
 <div class="rounded-lg text-light-black bg-white mt-10  h-[10rem] p-10">
-    <h1 class="text-light-black text-xl mb-2">{{ title }}</h1>
+    <h1 class="text-light-black font-semibold text-xl mb-2">{{ title }}</h1>
     <div class="flex items-center">
         <div class="flex gap-6 items-center text-gray justify-start w-full">
             <div>
@@ -15,7 +15,6 @@
             <div>
                 <span class="text-sm mb-0.5 text-gray">{{ skills }} skills</span>
             </div>
-            
         </div>
     </div>
 </div>
