@@ -17,5 +17,7 @@ export default defineConfig({
   },
   define: {
     'process.env.API_URL': JSON.stringify(process.env.API_URL),
-  }
+  },
+  assetsInclude: ['**/*.JPG'],
+
 })
