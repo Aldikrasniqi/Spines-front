@@ -1,5 +1,5 @@
 <template>
-  <main class="h-[500px] max-w-full bg-white mb-10">
+  <main class="h-[500px] max-w-full bg-white pb-4">
     <div class="max-w-6xl mx-auto">
       <div class="flex flex-row flex-wrap justify-between items-center">
         <h1 class="text-3xl text-light-black font-bold">
@@ -60,7 +60,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { ref, computed } from 'vue';
 import Card from '../Card.vue';
-import type { Opportunities } from '../../interfaces/Opportunities';
+import type { Opportunities } from '@/interfaces/Opportunities';
 
 const opportunities = ref<Opportunities[]>([
   {
@@ -175,3 +175,4 @@ const getIndicatorOffset = computed(() => {
   opacity: 0;
 }
 </style>
+../../interfaces/opportunities
