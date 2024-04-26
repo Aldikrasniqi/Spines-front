@@ -1,6 +1,6 @@
 <template>
-  <main class="h-[500px] max-w-full bg-white pb-4">
-    <div class="max-w-6xl mx-auto">
+  <main class=" max-w-full bg-white overflow-hidden">
+    <div class="max-w-6xl mx-auto p-6">   
       <div class="flex flex-row flex-wrap justify-between items-center">
         <h1 class="text-3xl text-light-black font-bold">
           <span class="text-blue">Latest</span> Job Opportunities
@@ -16,9 +16,9 @@
           />
         </div>
       </div>
-      <div class="flex justify-center items-center mt-6">
-        <div class="w-1/3 flex gap-3">
-          <div class="w-2 h-74 text-gray bg-light-gray rounded">
+      <div class="flex justify-center items-center flex-wrap mt-6">
+        <div class="lg:w-1/3 w-full flex gap-3">
+          <div class="lg:block md:hidden sm:hidden hidden w-2 h-74 text-gray bg-light-gray rounded">
             <div
               v-for="(opportunity, index) in opportunities"
               :key="index"
@@ -26,7 +26,7 @@
               :style="{ backgroundColor: getIndicatorColor(opportunity.title) }"
             ></div>
           </div> 
-          <div class="flex flex-col gap-3 p-0.5">
+          <div class="flex lg:flex-col flex-row flex-wrap items-center gap-3 p-0.5">
             <button
               v-for="button in opportunities"
               :key="button.title"
@@ -40,7 +40,7 @@
             </button>
           </div>
         </div>
-        <div class="w-4/6">
+        <div class="lg:w-4/6 w-full">
           <Card
             v-if="selectedOpportunity"
             :title="selectedOpportunity.title"
