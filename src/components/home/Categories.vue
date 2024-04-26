@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-full bg-light-silver pt-10">
-    <div class="flex flex-col max-w-6xl mx-auto h-[830px]">
+  <div class="max-w-full bg-light-silver lg:p-20 p-10">
+    <div class="flex flex-col max-w-6xl mx-auto">
       <h1 class="font-bold text-3xl text-light-black">
         Browse Talent by Category
       </h1>
