@@ -1,7 +1,7 @@
 <template>
-    <main class="lg-2xl h-[550px] max-w-6xl mx-auto flex items-center overflow-hidden">
-      <div class="w-[800px]">
-        <div class="flex items-center gap-4 mb-4">
+    <main class="lg-2xl max-w-6xl mx-auto flex flex-wrap lg:justify-start justify-center lg:text-start text-center items-center overflow-hidden lg:py-20 pt-10 lg:pt-0 lg:pb-0">
+      <div class="lg:w-1/2 pb-4">
+        <div class="flex items-center lg:justify-start justify-center gap-4 mb-4">
           <label class="inline-flex items-center cursor-pointer justify-center">
           <input class="sr-only peer" type="checkbox" value="" checked disabled>
             <div
@@ -20,7 +20,7 @@
           Connect with top freelancers and <br />
           clients on our platform! find your perfect match for your next project.
         </p>
-        <div class="flex -space-x-2 rtl:space-x-reverse mt-6 mb-2">
+        <div class="flex lg:justify-start justify-center -space-x-2 rtl:space-x-reverse mt-6 mb-2">
           <img
             v-for="tab in usersProfileTabs"
             :key="tab.key"
@@ -34,7 +34,7 @@
           complete your projects
         </p>
       </div>
-      <div class="w-full ">
+      <div class="lg:w-1/2 lg:block w-full md:hidden hidden">
        <div class="flex flex-row-reverse relative">
         <img
           src="https://s3-alpha-sig.figma.com/img/ebbd/78e6/c042ceab8b8404d2a015f0122935ea2f?Expires=1714348800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jDDjQdGl0z9ZltipwACUeBBqHHkWUECl51u9yOKP-znG55OIGMbMTkCB5sbjVJsske-xAM9Dc8uIwNGTCwZFkpyx74wgy9AMwGDWXU2BOBHJlCutYds3zgmyfsJ8gy~nx4EQr2Q-RNISm7d7P6rp1EcXkcO-Xtv1HNSUeXqEW7Y6CjbheNOgD-lCJmdOSZD3JpSP41H1RD~egYf8H99x1CTr7k70QcsM3h9RdA4Z7mRnyFUJKWTcnxo3X8X25nKMSTlTF3RAV5r7VmUos8gxwlSHdrqm-rhltvNJGA1bqMuv4nJ2Za2AhbLXzaCFKWh-njPfdrAuHOSRnR37CDw~Lg__"
