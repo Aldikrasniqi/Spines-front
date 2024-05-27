@@ -178,7 +178,7 @@
         :error="auth.registerUserErrors.birthdate"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
       />
-      <div class="relative flex items-center">
+      <!-- <div class="relative flex items-center">
         <input 
           type="text"
           id="skills"
@@ -208,7 +208,7 @@
       <FieldError
         :error="auth.registerUserErrors.skills"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
-      />
+      /> -->
       <button
         type="submit"
         class="text-white w-full bg-ex-light-blue text-center p-2 rounded-lg mb-2 hover:bg-dark-blue"
@@ -228,7 +228,12 @@ defineProps<{
   isUser: string;
 }>();
 
-const submitUserRegistationForm = () => {
-  auth.registerUser(auth.RegisterCredentials);
+const submitUserRegistationForm = async () => {
+  const response = await auth.registerUser(auth.RegisterCredentials);
+  // if (response) {
+  //   if(response.response.status === 409) {
+  //       auth.registerUserErrors.email = 'Email already exists';
+  //   }
+  // }
 };
 </script>

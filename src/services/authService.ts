@@ -6,6 +6,7 @@ import type {
 import axiosInstance from '@/plugins/axios';
 import axios from 'axios';
 import { API_URL } from '@/constants/api';
+
 export async function login(payload: LoginCredentials) {
   try {
     const response = (await axios.post(`${API_URL}auth/authenticate`, payload)).data

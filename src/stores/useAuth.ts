@@ -58,9 +58,9 @@ export const useAuthStore = defineStore('auth', {
         const today = new Date();
         const birthdate = new Date(credentials.birthdate);
         const age = today.getFullYear() - birthdate.getFullYear();
-        if(age < 18){
-          this.registerUserErrors.birthdate = 'You must be at least 18 years old';
-        }
+        // if(age < 18){
+        //   this.registerUserErrors.birthdate = 'You must be at least 18 years old';
+        // }
       }else {
         this.registerUserErrors.birthdate = 'Birthdate is required';
       }
@@ -70,9 +70,26 @@ export const useAuthStore = defineStore('auth', {
       this.registerUserErrors = {};
       try {
         const response = await registerUser(credentials);
-        return response;
+        console.log(response);
+        if(response.status === 200){
+          const token = `Bearer ${response.data.access_token}`
+          localStorage.setItem('token', token);
+          axiosInstance.defaults.headers.common['Authorization'] = token;
+          this.loggedIn = true;
+          // this.user = response.data.user
+          // this.user.roles = response.roles ? response.roles : ['user'];
+          window.location.href = '/dashboard';
+          return response;
+        }
+        if(response.response.status === 409){
+          this.registerUserErrors = {
+            email: 'Email is already taken',
+          }
+          return response;
+        }
       } catch (error) {
         console.log(error);
+        return error;
       }
     },
     async registerCompany(credentials: RegisterCompanyCredentials) {
@@ -122,31 +139,50 @@ export const useAuthStore = defineStore('auth', {
       this.registerCompanyErrors = {};
       try {
         const response = await registerCompany(credentials);
-        return response;
+        if(response){
+          const token = `Bearer ${response.access_token}`
+          localStorage.setItem('token', token);
+          axiosInstance.defaults.headers.common['Authorization'] = token;
+          this.loggedIn = true;
+          // this.user = response.data.user
+          // this.user.roles = response.roles ? response.roles : ['user'];
+          window.location.href = '/dashboard';
+        }
+        
       } catch (error) {
+        this.registerCompanyErrors = {
+          email: 'Email is already taken',
+          password: 'Password is required',
+          password_confirmation: 'Password confirmation is required',
+          phone: 'Phone is required',
+          address: 'Address is required',
+          website: 'Website is required',
+          skills: 'Skills are required',
+        }
+        return error;
         console.log(error);
       }
     },
     async loginUser(credentials: LoginCredentials) {
-      // this.loginErrors = {};
-      // if (!credentials.email) {
-      //   this.loginErrors.email = 'Email is required';
-      // }
-      // if (!EMAIL_REGEX.test(credentials.email)) {
-      //   this.loginErrors.email = 'Email is invalid';
-      // }
+      this.loginErrors = {};
+      if (!credentials.email) {
+        this.loginErrors.email = 'Email is required';
+      }
+      if (!EMAIL_REGEX.test(credentials.email)) {
+        this.loginErrors.email = 'Email is invalid';
+      }
 
-      // if (!credentials.password) {
-      //   this.loginErrors.password = 'Password is required';
-      // }
-      // if (!PASSWORD_REGEX.test(credentials.password)) {
-      //   this.loginErrors.password =
-      //     'Please enter a valid password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.';
-      // }
-      // if (Object.keys(this.loginErrors).length) {
-      //   return;
-      // }
-      // this.loginErrors = {};
+      if (!credentials.password) {
+        this.loginErrors.password = 'Password is required';
+      }
+      if (!PASSWORD_REGEX.test(credentials.password)) {
+        this.loginErrors.password =
+          'Please enter a valid password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.';
+      }
+      if (Object.keys(this.loginErrors).length) {
+        return;
+      }
+      this.loginErrors = {};
       try {
         const response = await login(credentials);
         console.log(response);
@@ -155,14 +191,16 @@ export const useAuthStore = defineStore('auth', {
           localStorage.setItem('token', token);
           axiosInstance.defaults.headers.common['Authorization'] = token;
           this.loggedIn = true;
-
           // this.user = response.data.user
           // this.user.roles = response.roles ? response.roles : ['user'];
           window.location.href = '/dashboard';
         } 
         return response;
       } catch (error) {
-        console.log(error);
+        this.loginErrors = {
+          email: 'Email or password is incorrect',
+          password: 'Email or password is incorrect',
+        }
         return error;
       }
     },
