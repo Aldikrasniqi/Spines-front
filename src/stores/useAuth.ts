@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { jwtDecode } from 'jwt-decode';
 import type {
   User,
   LoginCredentials,
@@ -8,17 +9,20 @@ import type {
 import { login, registerUser, registerCompany,fetchUserData } from '@/services/authService';
 import { EMAIL_REGEX, PASSWORD_REGEX, PHONE_REGEX } from '@/constants/regex';
 import axiosInstance from '@/plugins/axios';
+import type { Company } from '@/interfaces/company';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     // init state here
     loggedIn: localStorage.getItem("token") ? true : false,
     user: {} as User,
+    company: {} as Company,
     LoginCredentials: {} as LoginCredentials,
     RegisterCredentials: {} as RegisterCredentials,
     RegisterCompanyCredentials: {} as RegisterCompanyCredentials,
     loginErrors: {} as any,
     registerUserErrors: {} as any,
     registerCompanyErrors: {} as any,
+    isUser: false,
   }),
   getters: {
     // getters to access state
@@ -209,13 +213,27 @@ export const useAuthStore = defineStore('auth', {
       window.location.href = '/';
       localStorage.removeItem('token');
     },
+    decodeToken() {
+      if (localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+        const decoded: any = jwtDecode(token!);
+        console.log(decoded);
+        if(decoded.role === 'COMPANY'){
+          this.isUser = false;
+        }else{
+          this.isUser = true;
+        }
+        // this.user = decoded;
+      }
+    },
     async getUser() {
-      const usr = await fetchUserData();
-      if (usr) {
-        this.loggedIn = true;
-        this.user = usr;
-      } else {
-        this.logout();
+      const usr = await fetchUserData(this.isUser);
+      if(usr){
+        if(this.isUser){
+          this.user = usr.data;
+        }else{
+          this.company = usr.data;
+        }
       }
     },
     validateEmail(email: string, type: string) {

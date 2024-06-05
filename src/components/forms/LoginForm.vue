@@ -105,7 +105,7 @@ const submitLogin = async () => {
 };
 onMounted(() => {
   auth.LoginCredentials = {
-    email: 'john.doe@example.com',
+    email: 'johni.doe@example.com',
     password: 'Password123!',
   };
 });

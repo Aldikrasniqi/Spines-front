@@ -4,10 +4,11 @@ import router from '@/router';
 
 const token = localStorage.getItem('token');
 axios.defaults.baseURL = API_URL;
+console.log(token);
 const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
-    ...token && { 'Authorization': `Bearer ${token}` },
+    ...token && { 'Authorization': `${token}` },
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
@@ -18,7 +19,7 @@ const onRequest = (config: any) => {
     config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`
   };
   return config;
-};
+};  
 
 
 axiosInstance.interceptors.request.use(onRequest, null);
