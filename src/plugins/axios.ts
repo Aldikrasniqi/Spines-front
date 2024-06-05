@@ -1,6 +1,7 @@
-import axios from 'axios';
+import axios, {type AxiosRequestConfig, type InternalAxiosRequestConfig} from 'axios';
 import { API_URL } from '@/constants/api';
 import router from '@/router';
+import {useAuthStore} from "@/stores/useAuth";
 
 const token = localStorage.getItem('token');
 axios.defaults.baseURL = API_URL;
@@ -14,9 +15,9 @@ const axiosInstance = axios.create({
   },
 })
     
-const onRequest = (config: any) => {
-  if (!config.headers['Authorization']) {
-    config.headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+const onRequest = (config: InternalAxiosRequestConfig) => {
+  if (!config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
   };
   return config;
 };  
@@ -28,14 +29,25 @@ axiosInstance.interceptors.response.use(
     function (response) {
       return response;
     },
-    function (error) {
+    async function (error) {
       if (!error.response) return;
       switch (error.response.status) {
-        case 403:
-          router.push({
-              name: 'notfound',
-              params: {code: 403},
+          case 401:
+              await useAuthStore().logout();
+
+              await router.push({
+              name: 'login',
+              params: {code: 401},
           });
+          break;
+        case 403:
+            await useAuthStore().logout();
+
+
+            await router.push({
+                name: 'login',
+                params: {code: 403},
+            });
           
           break;
         default:

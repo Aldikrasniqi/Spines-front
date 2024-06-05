@@ -24,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'auth',
       menuGroup: 'home',
+      requireAuth: false,
     },
   },
   {
@@ -44,6 +45,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'auth',
       menuGroup: 'auth',
+      requireAuth: false,
     },
   },
   {
@@ -54,6 +56,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       menuGroup: 'auth',
       layout: 'auth',
+      requireAuth: false,
     },
   },
   {
@@ -62,9 +65,20 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       layout: 'auth',
       menuGroup: 'auth',
+      requireAuth: false,
     },
     component: () => import('@/views/AboutView.vue'),
   },
+  {
+    path: '/feed',
+    name: 'feed',
+    meta: {
+      layout: 'feed',
+      menuGroup: 'feed',
+      requireAuth: true,
+    },
+    component: () => import('@/views/FeedView.vue'),
+  }
 
   // {
   //   path: '/:pathMatch(.*)*',
