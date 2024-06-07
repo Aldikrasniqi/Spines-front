@@ -41,7 +41,17 @@ export const updateProjects = async (id: string, payload: Project) => {
     } catch (error) {
         
     }
-}   
+}
+
+export const fetchProjectsByCompany = async () => {
+    try {
+        const response = await axiosInstance.get(`${API_URL}companies/me/projects`);
+
+        return response.data;
+    } catch (error) {
+
+    }
+}
 
 export const fetchProjectById = async (id: string) => {
     try {
