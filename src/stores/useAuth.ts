@@ -6,10 +6,19 @@ import type {
   RegisterCredentials,
   RegisterCompanyCredentials,
 } from '@/interfaces/User';
-import { login, registerUser, registerCompany,fetchUserData } from '@/services/authService';
+import {
+  login,
+  registerUser,
+  registerCompany,
+  fetchUserData,
+  updateUserProfile,
+  updateCompanyProfile, logout
+} from '@/services/authService';
 import { EMAIL_REGEX, PASSWORD_REGEX, PHONE_REGEX } from '@/constants/regex';
 import axiosInstance from '@/plugins/axios';
 import type { Company } from '@/interfaces/company';
+import router from "@/router";
+import {useSkills} from "@/stores/useSkills";
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     // init state here
@@ -74,15 +83,14 @@ export const useAuthStore = defineStore('auth', {
       this.registerUserErrors = {};
       try {
         const response = await registerUser(credentials);
-        console.log(response);
         if(response.status === 200){
           const token = `Bearer ${response.data.access_token}`
           localStorage.setItem('token', token);
           axiosInstance.defaults.headers.common['Authorization'] = token;
           this.loggedIn = true;
-          // this.user = response.data.user
-          // this.user.roles = response.roles ? response.roles : ['user'];
-          window.location.href = '/dashboard';
+          this.isUser = true;
+
+          await router.push({name: 'Dashboard'})
           return response;
         }
         if(response.response.status === 409){
@@ -96,9 +104,28 @@ export const useAuthStore = defineStore('auth', {
         return error;
       }
     },
+    async updateUserProfile() {
+      const updatedUser = await updateUserProfile(this.user);
+
+      if(!updatedUser){
+        return;
+      }
+
+      this.user = updatedUser!;
+      await useSkills().fetchSkills()
+    },
+    async updateCompanyProfile() {
+      const updatedCompany = await updateCompanyProfile(this.company);
+
+      if(!updatedCompany){
+        return;
+      }
+
+      this.company = updatedCompany!;
+    },
     async registerCompany(credentials: RegisterCompanyCredentials) {
       this.registerCompanyErrors = {};
-      if (!credentials.name) {
+      if (!credentials.companyName) {
         this.registerCompanyErrors.name = 'Name is required';
       }
       if (!credentials.email) {
@@ -112,29 +139,29 @@ export const useAuthStore = defineStore('auth', {
         this.registerCompanyErrors.password =
           'Please enter a valid password with at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.';
       }
-      if (!credentials.password_confirmation) {
+      if (!credentials.passwordConfirmation) {
         this.registerCompanyErrors.password_confirmation =
           'Password confirmation is required';
-      } else if (credentials.password !== credentials.password_confirmation) {
+      } else if (credentials.password !== credentials.passwordConfirmation) {
         this.registerCompanyErrors.password_confirmation =
           'Passwords do not match';
       }
-      if (!credentials.phone) {
+      if (!credentials.phoneNumber) {
         this.registerCompanyErrors.phone = 'Phone is required';
-      } else if (!PHONE_REGEX.test(credentials.phone!)) {
+      } else if (!PHONE_REGEX.test(credentials.phoneNumber!)) {
         this.registerCompanyErrors.phone =
           'Please enter a valid phone number with 10 digits';
       }
       if (!credentials.address) {
         this.registerCompanyErrors.address = 'Address is required';
       }
-      if(!credentials.organization_type){
+      if(!credentials.organizationType){
         this.registerCompanyErrors.organization_type = 'Organization type is required';
       }
-      if (!credentials.website) {
+      if (!credentials.webPageUrl) {
         this.registerCompanyErrors.website = 'Website is required';
       }
-      if (!credentials.skills) {
+      if (!credentials.webPageUrl) {
         this.registerCompanyErrors.skills = 'Skills are required';
       }
       if (Object.keys(this.registerCompanyErrors).length) {
@@ -143,14 +170,13 @@ export const useAuthStore = defineStore('auth', {
       this.registerCompanyErrors = {};
       try {
         const response = await registerCompany(credentials);
-        if(response){
+        if(response.status === 200){
           const token = `Bearer ${response.access_token}`
           localStorage.setItem('token', token);
           axiosInstance.defaults.headers.common['Authorization'] = token;
           this.loggedIn = true;
-          // this.user = response.data.user
-          // this.user.roles = response.roles ? response.roles : ['user'];
-          window.location.href = '/dashboard';
+
+          await  router.push({name: 'feed'})
         }
         
       } catch (error) {
@@ -164,7 +190,6 @@ export const useAuthStore = defineStore('auth', {
           skills: 'Skills are required',
         }
         return error;
-        console.log(error);
       }
     },
     async loginUser(credentials: LoginCredentials) {
@@ -189,18 +214,17 @@ export const useAuthStore = defineStore('auth', {
       this.loginErrors = {};
       try {
         const response = await login(credentials);
-        console.log(response);
         if(response){
           const token = `Bearer ${response.access_token}`
           localStorage.setItem('token', token);
           axiosInstance.defaults.headers.common['Authorization'] = token;
           this.loggedIn = true;
-          // this.user = response.data.user
-          // this.user.roles = response.roles ? response.roles : ['user'];
-          window.location.href = '/dashboard';
+
+          await router.push({path: '/dashboard'})
         } 
         return response;
       } catch (error) {
+        console.log(error)
         this.loginErrors = {
           email: 'Email or password is incorrect',
           password: 'Email or password is incorrect',
@@ -210,19 +234,18 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout() {
       this.user = {} as User;
-      window.location.href = '/';
+      this.company = {} as Company
+      this.isUser = false;
+      this.loggedIn = false;
       localStorage.removeItem('token');
+
+      await router.push({path: '/login'})
     },
     decodeToken() {
       if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
         const decoded: any = jwtDecode(token!);
-        if(decoded.role === 'COMPANY'){
-          this.isUser = false;
-        }else{
-          this.isUser = true;
-        }
-        // this.user = decoded;
+        this.isUser = decoded.role !== 'COMPANY';
       }
     },
     async getUser() {
@@ -334,6 +357,19 @@ export const useAuthStore = defineStore('auth', {
         registerUserErrors: this.registerUserErrors,
       };
       if (errors[type]) errors[type].last_name = !last_name ? 'Last name is required' : null;
-    }
+    },
+    async fetchUser() {
+      const user = await fetchUserData(this.isUser);
+      if (this.isUser && user) {
+        this.user = user.data;
+        return
+      }
+
+      if (!this.isUser && user) {
+        this.company = user.data;
+        return
+      }
+    },
+
   },
 });

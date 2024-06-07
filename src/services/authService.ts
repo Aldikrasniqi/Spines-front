@@ -1,12 +1,13 @@
 import type {
   LoginCredentials,
   RegisterCompanyCredentials,
-  RegisterCredentials,
+  RegisterCredentials, User,
 } from '@/interfaces/User';
 import axiosInstance from '@/plugins/axios';
 import axios from 'axios';
 import { API_URL } from '@/constants/api';
-
+import type {Company} from "@/interfaces/company";
+import Swal from 'sweetalert2'
 
 export async function login(payload: LoginCredentials) {
   try {
@@ -30,9 +31,8 @@ export async function registerUser(payload: RegisterCredentials) {
 }
 
 export async function registerCompany(payload: RegisterCompanyCredentials) {
-  console.log(payload);
   try {
-    const response = await axios.post('/auth/register-company', payload);
+    const response = await axios.post('auth/signup/company', payload);
     return response;
   } catch (error: any) {
     console.log(error);
@@ -55,7 +55,7 @@ export async function fetchUserData(isUser: boolean) {
 }
 export async function logout() {
   try {
-    const response = (await axiosInstance.post(`${API_URL}/logout`)).data;
+    const response = (await axiosInstance.post(`${API_URL}logout`)).data;
     return response;
   } catch (error) {
     throw error;
@@ -68,4 +68,47 @@ export async function fetchUserById(id: string) {
   } catch (error) {
     return null;
   }
+}
+
+export async function updateUserProfile(payload: User) {
+  try {
+    const response = await axiosInstance.put<User>(`${API_URL}volunteers/me`, payload);
+
+    Swal.fire({
+      icon: 'success',
+      text: 'Updated profile successfully!',
+    })
+
+    return response.data;
+  } catch (error) {
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Failed to update user!',
+    })
+
+    return null;
+  }
+}
+
+export async function updateCompanyProfile(payload: Company){
+    try {
+        const response = await axiosInstance.put<Company>(`${API_URL}companies/me`, payload);
+
+      Swal.fire({
+        icon: 'success',
+        text: 'Updated profile successfully!',
+      })
+
+        return response.data;
+    } catch (error) {
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Failed to update user!',
+      })
+
+    }
 }
