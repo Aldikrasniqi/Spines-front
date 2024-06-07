@@ -21,18 +21,14 @@
   
 
   <script setup lang="ts">
-  interface Skill {
+  import type {Company} from "@/interfaces/company";
+
+  export interface Skill {
     id: number;
     name: string;
   }
   
-  interface Company {
-    companyName: string;
-    companyDescription: string;
-    companyLocation: string;
-    companyWebsite: string;
-    companyLogo: string;
-  }
+
   
   interface Route {
     name: string;

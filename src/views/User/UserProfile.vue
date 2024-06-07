@@ -23,22 +23,31 @@
 
 <script lang="ts" setup>
 import { ref, markRaw } from 'vue';
-const profileFields = ref([
-  'Public Profile',
-  'Account Settings',
-  'Notifications',
-  'PRO Account',
-]);
 const activeField = ref('Public Profile');
 import ProfileEdit from '@/components/ProfileEdit.vue';
-import AccountSettings from '@/components/AccountSettings.vue';
+import AccountSettings from '@/components/CompanyProjects.vue';
 import Notifications from '@/components/Notifications.vue';
 import ProAccount from '@/components/ProAccount.vue';
+import {useAuthStore} from "@/stores/useAuth";
+
+const auth = useAuthStore()
+
+const profileFields = ref([
+  'Public Profile',
+]);
+
+if(!auth.isUser && auth.company){
+  profileFields.value.push('Projects');
+}
+
+if(auth.isUser && auth.user){
+  profileFields.value.push('Applications');
+}
 
 const componentsMap: Record<string, any> = {
   'Public Profile': markRaw(ProfileEdit),
-  'Account Settings': markRaw(AccountSettings),
-  'Notifications': markRaw(Notifications),
+  'Projects': markRaw(AccountSettings),
+  'Applications': markRaw(Notifications),
   'PRO Account': markRaw(ProAccount),
 };
 
