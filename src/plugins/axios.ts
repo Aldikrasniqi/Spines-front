@@ -8,7 +8,7 @@ axios.defaults.baseURL = API_URL;
 const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
-    ...token && { 'Authorization': `Bearer ${token}` },
+    ...token && { 'Authorization': `${token}` },
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
@@ -19,7 +19,7 @@ const onRequest = (config: InternalAxiosRequestConfig) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
   };
   return config;
-};
+};  
 
 
 axiosInstance.interceptors.request.use(onRequest, null);

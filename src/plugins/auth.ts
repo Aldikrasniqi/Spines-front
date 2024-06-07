@@ -5,7 +5,8 @@ export default {
         config.globalProperties.$auth = useAuthStore();
 
         if (useAuthStore().isLoggedIn) {
-          console.log('User is logged in');
+            useAuthStore().decodeToken();
+            useAuthStore().getUser();
            callback();
           }
         else callback();

@@ -2,9 +2,13 @@ import { PASSWORD_REGEX } from '../regex';
 import { expect, describe, test } from 'vitest';
 
 describe('Password regex test', () => {
-  test('should match password with at least 8 characters, 1 uppercase, 1 lowercase, and 1 number', () => {
-    const password = 'Test1234';
+  test('should match password with at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character', () => {
+    const password = 'Test1234.';
     expect(password).toMatch(PASSWORD_REGEX);
+  });
+  test('should not match password without special character', () => {
+    const password = 'Test1234';
+    expect(password).not.toMatch(PASSWORD_REGEX);
   });
   test('should not match password with less than 8 characters', () => {
     const password = 'Test123';

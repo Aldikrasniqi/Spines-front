@@ -1,7 +1,7 @@
 export interface User {
   id?: string;
-  first_name?: string;
-  last_name?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
   avatar?: string;
   roles?: string[]
@@ -9,6 +9,7 @@ export interface User {
   token?: string;
   createdAt?: string;
   updatedAt?: string;
+  skills?: string[];
 }
 
 export interface LoginCredentials {
@@ -19,7 +20,7 @@ export interface RegisterCredentials {
   firstName?: string;
   lastName?: string;
   email: string;
-  birthdate?: string;
+  birthdate?: Date;
   password?: string;
   password_confirmation?: string;
   skills?: string;
