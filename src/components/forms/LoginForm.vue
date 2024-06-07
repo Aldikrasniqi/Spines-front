@@ -92,11 +92,20 @@ import { onMounted } from 'vue';
 
 const auth = useAuthStore();
 const submitLogin = async () => {
-  auth.loginUser(auth.LoginCredentials);
+  const res = await auth.loginUser(auth.LoginCredentials);
+  console.log(res);
+  if (res === 200) {
+    console.log('Login successful');
+  }else if (res === 401) {
+    console.log('Invalid credentials');
+  } else {
+    console.log('An error occurred');
+  }
+
 };
 onMounted(() => {
   auth.LoginCredentials = {
-    email: 'john.doe@example.com',
+    email: 'johni.doe@example.com',
     password: 'Password123!',
   };
 });

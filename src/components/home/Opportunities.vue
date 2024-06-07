@@ -59,8 +59,9 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { ref, computed } from 'vue';
-import Card from '../Card.vue';
 import type { Opportunities } from '@/interfaces/Opportunities';
+import ProjectsCard from '../ProjectsCard.vue';
+import Card from '../Card.vue';
 
 const opportunities = ref<Opportunities[]>([
   {

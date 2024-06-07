@@ -1,5 +1,5 @@
 <template>
-  <div class="lg-2xl max-w-6xl mx-auto bg-white w-full flex flex-col  md:flex-row text-[#161931]">
+  <div class="lg-2xl max-w-7xl mx-auto bg-white w-full flex flex-col  md:flex-row text-[#161931]">
     <aside class="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
       <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
         <h2 class="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
@@ -17,18 +17,12 @@
         </a>
       </div>
     </aside>
-    <component :is="activeComponent" :data="props.data" />
+    <component :is="activeComponent" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, markRaw } from 'vue';
-import type { User } from '../../interfaces/User';
-
-const props = defineProps<{
-  data: User;
-}>();
-
+import { ref, markRaw } from 'vue';
 const profileFields = ref([
   'Public Profile',
   'Account Settings',

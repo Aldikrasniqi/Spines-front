@@ -73,11 +73,21 @@ const routes: Array<RouteRecordRaw> = [
     path: '/feed',
     name: 'feed',
     meta: {
-      layout: 'feed',
-      menuGroup: 'feed',
+      layout: 'auth',
+      menuGroup: 'auth',
       requireAuth: true,
     },
     component: () => import('@/views/FeedView.vue'),
+  },
+  {
+    path: '/projects/:id',
+    name: 'project',
+    meta: {
+      layout: 'auth',
+      menuGroup: 'auth',
+      requireAuth: true,
+    },
+    component: () => import('@/views/SingleProjectView.vue'),
   }
 
   // {

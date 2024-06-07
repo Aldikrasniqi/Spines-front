@@ -159,26 +159,24 @@
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
       />
       <div class="flex relative items-center">
-        <input 
+        <Calendar 
           type="date"
           id="birthDate"
           name="birthDate"
-          class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
+          class="w-full text-gray border-light-gray bg-white rounded-lg"
+          showIcon iconDisplay="input"
           placeholder="Birth Date"
           autocomplete="on"
           v-model="auth.RegisterCredentials.birthdate"
-          >
-        <FontAwesomeIcon
-          :icon="faCalendar"
-          class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray"  
-        />
+          />
+        
         <!-- <vue-tailwind-datepicker :formatter="formatter" v-model="auth.RegisterCredentials.birthdate" /> -->
       </div>
       <FieldError
         :error="auth.registerUserErrors.birthdate"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
       />
-      <div class="relative flex items-center">
+      <!-- <div class="relative flex items-center">
         <input 
           type="text"
           id="skills"
@@ -208,7 +206,7 @@
       <FieldError
         :error="auth.registerUserErrors.skills"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
-      />
+      /> -->
       <button
         type="submit"
         class="text-white w-full bg-ex-light-blue text-center p-2 rounded-lg mb-2 hover:bg-dark-blue"
@@ -223,12 +221,19 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faCalendar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useAuthStore } from '@/stores/useAuth';
 import FieldError from '@/components/FieldError.vue';
+import Calendar from 'primevue/calendar';
+
 const auth = useAuthStore();
 defineProps<{
   isUser: string;
 }>();
 
-const submitUserRegistationForm = () => {
-  auth.registerUser(auth.RegisterCredentials);
+const submitUserRegistationForm = async () => {
+  const response = await auth.registerUser(auth.RegisterCredentials);
+  // if (response) {
+  //   if(response.response.status === 409) {
+  //       auth.registerUserErrors.email = 'Email already exists';
+  //   }
+  // }
 };
 </script>
