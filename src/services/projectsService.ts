@@ -5,14 +5,16 @@ import type { Project } from "@/interfaces/projects";
 export const createProject = async (payload: Project) => {
     try {
         const response = await axiosInstance.post(`${API_URL}projects`, payload);
+        return response
     } catch (error) {
         
     }
 }
 
-export const fetchProjects = async () => {
+export const fetchProject = async () => {
     try {
         const response = await axiosInstance.get(`${API_URL}projects`);
+        return response.data;
     } catch (error) {
         
     }

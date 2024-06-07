@@ -10,9 +10,13 @@
           <a
             href="/"
             class="font-sans font-extrabold text-blue text-3xl tracking-widest"
-            >JOB</a
+            >SPINES</a
           >
+          
         </div>
+        <div>
+            <a href="/feed" class="font-medium" >Feeds</a>
+          </div>
         <div>
           <img
             id="avatarButton"
@@ -24,7 +28,7 @@
             alt="User dropdown"
             @click="togleDropDown"
           />
-
+          
           <!-- Dropdown menu -->
           <div
             id="userDropdown"
@@ -39,6 +43,9 @@
               </div>
               <div class="font-medium truncate">
                 {{ userData.email }}
+              </div>
+              <div>
+                
               </div>
             </a>
             <div class="py-1">

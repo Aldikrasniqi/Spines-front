@@ -217,7 +217,6 @@ export const useAuthStore = defineStore('auth', {
       if (localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
         const decoded: any = jwtDecode(token!);
-        console.log(decoded);
         if(decoded.role === 'COMPANY'){
           this.isUser = false;
         }else{

@@ -5,7 +5,6 @@ import {useAuthStore} from "@/stores/useAuth";
 
 const token = localStorage.getItem('token');
 axios.defaults.baseURL = API_URL;
-console.log(token);
 const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {

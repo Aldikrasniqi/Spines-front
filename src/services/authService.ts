@@ -42,7 +42,6 @@ export async function registerCompany(payload: RegisterCompanyCredentials) {
 
 export async function fetchUserData(isUser: boolean) {
   try {
-    console.log(isUser);
     if (isUser) {
       const response = await axiosInstance.get(`${API_URL}volunteers/me`);
       return response;
