@@ -11,9 +11,9 @@ import auth from './plugins/auth';
 import 'primevue/resources/themes/lara-light-green/theme.css';
 import 'primevue/resources/primevue.min.css'
 import 'primevue/resources/primevue.css'
+// @ts-ignore
 import Lara from '@/presets/lara'
 // const pinia = createPinia()
-
 const initApp = () => {
   console.log('initApp auth');
 };

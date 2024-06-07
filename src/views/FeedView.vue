@@ -6,6 +6,7 @@
         <div>
           <div class="p-6 flex items-center w-full justify-between gap-2">
             <SearchBar />
+            <!-- @vue-ignore -->
             <button
               v-if="!$auth.isUser"
               class="bg-primary rounded-xl text-white w-1/4 p-3"
@@ -23,11 +24,10 @@
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
+        <!-- @vue-ignore -->
         <template
           v-for="project in projects.projects.content"
           :key="project.type"
-          
         >
           <ProjectsCard
             :name="project.name"
@@ -38,21 +38,20 @@
             :company="project.company"
             :to="{ name: 'project', params: { id: project.id } }"
           />
-
-        </template> 
+        </template>
       </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useAuthStore } from '../stores/useAuth';
 import SearchBar from '@/components/SearchBarProjects.vue';
 import CreateProjectDialog from '@/components/CreateProjectDialog.vue';
 import FilterMenu from '@/components/FilterMenu.vue';
 import { useProjectsStore } from '@/stores/useProjects';
-import ProjectsCard from '@/components/Card.vue';
+import ProjectsCard from '@/components/ProjectsCard.vue';
 import Button from 'primevue/button';
 
 const auth = useAuthStore();

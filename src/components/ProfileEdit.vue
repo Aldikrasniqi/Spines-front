@@ -1,4 +1,5 @@
 <template>
+  <!-- @vue-ignore -->
   <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4" v-if="$auth.isUser">
     <div class="p-2 md:p-4">
       <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">

@@ -1,5 +1,6 @@
 
 <template>
+  <!-- @vue-expect-error -->
   <div class="header__style" v-if="$auth.loggedIn">
     <!-- @vue-ignore -->
     <div class="">

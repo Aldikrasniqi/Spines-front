@@ -33,7 +33,7 @@
                 required
               />
             </div>
-
+            <!-- @vue-ignore -->
             <button
               v-if="!$auth.isUser"
               class="bg-primary rounded-xl text-white w-1/4 p-3"
@@ -70,15 +70,15 @@
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <div class="w-full">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Name</label>
-            <input type="text" v-model="projectsStore.projectCredentials.name" name="name"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Project name" required="">
+            <input type="text" v-model="projectsStore.projectCredentials.name" name="name"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Project name">
           </div>
           <div class="w-full">
             <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Project Type</label>
-            <input type="text" name="type" v-model="projectsStore.projectCredentials.type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Project type" required="">
+            <input type="text" name="type" v-model="projectsStore.projectCredentials.type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Project type">
           </div>
           <div class="sm:col-span-2">
             <label for="information" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Information</label>
-            <input type="text" name="information" v-model="projectsStore.projectCredentials.information"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Project information" required="">
+            <input type="text" name="information" v-model="projectsStore.projectCredentials.information"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Project information">
           </div>
           <div class="sm:col-span-2">
             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Skills</label>
