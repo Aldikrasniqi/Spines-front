@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { createProject, fetchProject } from '../services/projectsService';
+import { createProject, fetchProject, fetchProjectById } from '../services/projectsService';
 import type { Project } from '@/interfaces/projects';
 
 export const useProjectsStore = defineStore('projects', {
@@ -17,6 +17,7 @@ export const useProjectsStore = defineStore('projects', {
     } as Project,
     filteredProjects: [] as Project[],
     searchQuery: '',
+    singleProject: {} as any
   }),
   actions: {
     async createProjects() {
@@ -35,6 +36,19 @@ export const useProjectsStore = defineStore('projects', {
       try {
         const response = await fetchProject();
         this.projects = response
+      } catch (error) {
+        
+      }
+    },
+    async fetchProjectsById(id: string) {
+      try {
+        const response = await fetchProjectById(id);
+        if(response){
+          this.project = response.data
+        }
+        if(response){
+          this.singleProject = response
+        }
       } catch (error) {
         
       }

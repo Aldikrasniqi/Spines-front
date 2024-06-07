@@ -40,10 +40,12 @@
               class="px-4 py-3 text-sm text-gray-900 dark:text-white"
             >
               <div>
-                <span class="font-medium">{{ userData.name }}</span>
+                <span class="font-medium">
+                  {{ auth.company ? auth.company.companyName : auth.user.firstName }}
+                </span>
               </div>
               <div class="font-medium truncate">
-                {{ userData.email }}
+                {{ auth.company ? auth.company.email : auth.user.email}}
               </div>
               <div>
                 
@@ -73,12 +75,9 @@
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue';
 import { useAuthStore } from '../stores/useAuth';
+import { onMounted } from 'vue';
 const auth = useAuthStore();
-const userData = {
-  name: 'Aldi',
-  email: 'aldikrasniqi5@gmail.com',
-  roles: ['admin'],
-};
+
 const togleDropDown = () => {
   const dropdown = document.getElementById('userDropdown');
   dropdown?.classList.toggle('hidden');
@@ -86,6 +85,10 @@ const togleDropDown = () => {
 const logout = () => {
   auth.logout();
 };
+
+onMounted(() => {
+
+});
 </script>
 <style scoped>
 .header__style {

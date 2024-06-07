@@ -31,6 +31,7 @@ export const updateProjects = async (id: string, payload: Project) => {
 export const fetchProjectById = async (id: string) => {
     try {
         const response = await axiosInstance.get(`${API_URL}projects/${id}`);
+        return response
     } catch (error) {
         
     }

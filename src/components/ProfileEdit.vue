@@ -284,5 +284,5 @@ const auth = useAuthStore();
 //   sub: string;
 //   role: string;
 // }
-console.log(auth.user)
+
 </script>
