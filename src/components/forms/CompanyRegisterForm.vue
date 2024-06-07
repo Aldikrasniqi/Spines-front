@@ -7,18 +7,18 @@
           id="name"
           name="name"
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
-          placeholder="Your Name"
+          placeholder="Company Name"
           autocomplete="on"
-          v-model="auth.RegisterCompanyCredentials.name"
+          v-model="auth.RegisterCompanyCredentials.companyName"
           @keyup="
             auth.validateName(
-              auth.RegisterCompanyCredentials.name!,
+              auth.RegisterCompanyCredentials.companyName!,
               'registerCompanyErrors'
             )
           "
           @focusout="
             auth.validateName(
-              auth.RegisterCompanyCredentials.name!,
+              auth.RegisterCompanyCredentials.companyName!,
               'registerCompanyErrors'
             )
           "
@@ -38,7 +38,7 @@
           id="email"
           name="email"
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
-          placeholder="Your Email"
+          placeholder="Company Email"
           autocomplete="on"
           v-model="auth.RegisterCompanyCredentials.email"
           @keyup="
@@ -69,7 +69,7 @@
           id="password"
           name="password"
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
-          placeholder="Your Password"
+          placeholder="Password"
           autocomplete="on"
           v-model="auth.RegisterCompanyCredentials.password"
           @keyup="
@@ -102,18 +102,18 @@
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
           placeholder="Confirm Password"
           autocomplete="on"
-          v-model="auth.RegisterCompanyCredentials.password_confirmation"
+          v-model="auth.RegisterCompanyCredentials.passwordConfirmation"
           @keyup="
             auth.validateConfirmPassword(
               auth.RegisterCompanyCredentials.password!,
-              auth.RegisterCompanyCredentials.password_confirmation!,
+              auth.RegisterCompanyCredentials.passwordConfirmation!,
               'registerCompanyErrors'
             )
           "
           @focusout="
             auth.validateConfirmPassword(
               auth.RegisterCompanyCredentials.password!,
-              auth.RegisterCompanyCredentials.password_confirmation!,
+              auth.RegisterCompanyCredentials.passwordConfirmation!,
               'registerCompanyErrors'
             )
           "
@@ -133,17 +133,17 @@
           id="organizationType"
           name="organizationType"
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
-          placeholder="Organization Type"
+          placeholder="Company Type"
           autocomplete="on"
-          v-model="auth.RegisterCompanyCredentials.organization_type"
+          v-model="auth.RegisterCompanyCredentials.organizationType"
           @keyup="
             auth.validateOrganizationType(
-              auth.RegisterCompanyCredentials.organization_type!,
+              auth.RegisterCompanyCredentials.organizationType!,
               'registerCompanyErrors'
             )"
           @focusout="
             auth.validateOrganizationType(
-              auth.RegisterCompanyCredentials.organization_type!,
+              auth.RegisterCompanyCredentials.organizationType!,
               'registerCompanyErrors'
             )"
         />
@@ -164,16 +164,16 @@
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
           placeholder="Phone Number"
           autocomplete="on"
-          v-model="auth.RegisterCompanyCredentials.phone"
+          v-model="auth.RegisterCompanyCredentials.phoneNumber"
           @keyup="
             auth.validatePhoneNumber(
-              auth.RegisterCompanyCredentials.phone!,
+              auth.RegisterCompanyCredentials.phoneNumber!,
               'registerCompanyErrors'
             )
           "
           @focusout="
             auth.validatePhoneNumber(
-              auth.RegisterCompanyCredentials.phone!,
+              auth.RegisterCompanyCredentials.phoneNumber!,
               'registerCompanyErrors'
             )
           "
@@ -226,16 +226,16 @@
           class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
           placeholder="Website"
           autocomplete="on"
-          v-model="auth.RegisterCompanyCredentials.website"
+          v-model="auth.RegisterCompanyCredentials.webPageUrl"
           @keyup="
             auth.validateWebsite(
-              auth.RegisterCompanyCredentials.website!,
+              auth.RegisterCompanyCredentials.webPageUrl!,
               'registerCompanyErrors'
             )
           "
           @focusout="
             auth.validateWebsite(
-              auth.RegisterCompanyCredentials.website!,
+              auth.RegisterCompanyCredentials.webPageUrl!,
               'registerCompanyErrors'
             )
           "
@@ -249,39 +249,9 @@
         :error="auth.registerCompanyErrors.website"
         :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
       />
-      <div class="flex items-center relative">
-        <input
-          type="text"
-          id="skills"
-          name="skills"
-          class="border border-light-gray text-gray text-sm rounded-lg focus:ring-blue focus:border-blue block w-full p-3 pl-10 dark:bg-gray dark:border-gray dark:placeholder-gray dark:text-white dark:focus:ring-blue dark:focus:border-blue"
-          placeholder="Skills"
-          autocomplete="on"
-          v-model="auth.RegisterCompanyCredentials.skills"
-          @keyup="
-            auth.validateSkills(
-              auth.RegisterCompanyCredentials.skills!,
-              'registerCompanyErrors'
-            )
-          "
-          @focusout="
-            auth.validateSkills(
-              auth.RegisterCompanyCredentials.skills!,
-              'registerCompanyErrors'
-            )
-          "
-        />
-        <FontAwesomeIcon
-          :icon="faBriefcase"
-          class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray"
-        />
-      </div>
-      <FieldError
-        :error="auth.registerCompanyErrors.skills"
-        :classProp="'text-field-error mb-5 ml-2 text-sm font-medium mt-1'"
-      />
+
       <button
-        type="submit"
+        @click="submitCompanyRegistationForm"
         class="text-white w-full bg-ex-light-blue text-center p-2 rounded-lg mb-2 hover:bg-dark-blue"
       >
         Register
@@ -302,6 +272,8 @@ import {
   faBriefcase,
 } from '@fortawesome/free-solid-svg-icons';
 import FieldError from '@/components/FieldError.vue';
+import {FilterService} from "primevue/api";
+import register = FilterService.register;
 defineProps<{
   isCompany: string;
 }>();
