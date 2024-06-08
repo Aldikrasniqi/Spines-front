@@ -35,6 +35,7 @@
             <div class="font-medium truncate" v-if="auth.isUser">
               tests
             </div>
+        </div>
         </nav>
         <UserProfile />
    </div>
