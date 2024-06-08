@@ -1,5 +1,5 @@
 <template>
-  <div class="lg-2xl max-w-7xl mx-auto bg-white w-full flex flex-col  md:flex-row text-[#161931]">
+  <div class="flex w-full justify-between py-4 max-w-6xl mx-auto flex-col  md:flex-row text-[#161931]">
     <aside class="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
       <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
         <h2 class="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
@@ -23,22 +23,31 @@
 
 <script lang="ts" setup>
 import { ref, markRaw } from 'vue';
-const profileFields = ref([
-  'Public Profile',
-  'Account Settings',
-  'Notifications',
-  'PRO Account',
-]);
 const activeField = ref('Public Profile');
 import ProfileEdit from '@/components/ProfileEdit.vue';
-import AccountSettings from '@/components/AccountSettings.vue';
+import AccountSettings from '@/components/CompanyProjects.vue';
 import Notifications from '@/components/Notifications.vue';
 import ProAccount from '@/components/ProAccount.vue';
+import {useAuthStore} from "@/stores/useAuth";
+
+const auth = useAuthStore()
+
+const profileFields = ref([
+  'Public Profile',
+]);
+
+if(!auth.isUser && auth.company){
+  profileFields.value.push('Projects');
+}
+
+if(auth.isUser && auth.user){
+  profileFields.value.push('Applications');
+}
 
 const componentsMap: Record<string, any> = {
   'Public Profile': markRaw(ProfileEdit),
-  'Account Settings': markRaw(AccountSettings),
-  'Notifications': markRaw(Notifications),
+  'Projects': markRaw(AccountSettings),
+  'Applications': markRaw(Notifications),
   'PRO Account': markRaw(ProAccount),
 };
 
