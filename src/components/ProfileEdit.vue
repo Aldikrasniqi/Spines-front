@@ -1,6 +1,5 @@
 <template>
-  <!-- @vue-ignore -->
-  <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4" v-if="$auth.isUser">
+  <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4" v-if="auth.isUser">
     <div class="p-2 md:p-4">
       <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
         <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
@@ -45,7 +44,7 @@
                   id="first_name"
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Your first name"
-                  :value="auth.user.firstName"
+                  v-model="auth.user.firstName"
                   required
                 />
               </div>
@@ -61,7 +60,7 @@
                   id="last_name"
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Your last name"
-                  :value="auth.user.lastName"
+                  v-model="auth.user.lastName"
                   required
                 />
               </div>
@@ -79,7 +78,7 @@
                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                 placeholder="your.email@mail.com"
                 required
-                :value="auth.user.email"
+                v-model="auth.user.email"
               />
             </div>
 
@@ -87,7 +86,7 @@
               <label
                 for="birthdate"
                 class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                >Birthdate</label
+                >Birthdateee</label
               >
               <input
                 type="text"
@@ -95,7 +94,7 @@
                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                 placeholder="your birthdate"
                 required
-                :value="auth.user.birthdate"
+                v-model="auth.user.birthdate"
               />
             </div>
 
@@ -103,26 +102,38 @@
                 <label
                   for="message"
                   class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white"
-                  >Skills</label
+                  >Skillss</label
                 >
-                <span v-if="auth.user.skills">
-                  <span v-for="skill in auth.user.skills" :key="skill" class="inline-block px-2 py-1 text-sm font-medium text-white bg-indigo-500 rounded-full mr-2">{{ skill }}</span>
-                </span>
-                <span>
-                  <input
-                    type="text"
-                    id="skills"
-                    class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
-                    placeholder="Your skills"
-                    required
-                    value="No skills added yet"
-                  />
-                </span>
+              <ul
+                  class="flex flex-row flex-wrap overflow-hidden items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              >
+                <li
+                    v-for="skill in skillsStore.getSkills"
+                    :key="skill.id"
+                    class="lg:w-1/2 w-full dark:border-gray-600"
+                >
+                  <div class="flex items-center ps-3 w-full">
+                    <input
+                        :id="skill.id"
+                        :value="skill"
+                        v-model="auth.user.skills"
+                        type="checkbox"
+                        :checked="auth.user.skills?.includes(skill)"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                        :for="skill.id"
+                        class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    >{{ skill.name }}</label
+                    >
+                  </div>
+                </li>
+              </ul>
               </div>
 
             <div class="flex justify-end">
               <button
-                type="submit"
+                  @click="auth.updateUserProfile()"
                 class="text-white bg-primary hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
               >
                 Save
@@ -133,7 +144,7 @@
       </div>
     </div>
   </main>
-  <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4" v-else="$auth.isUser">
+  <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4" v-else>
     <div class="p-2 md:p-4">
       <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
         <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Company Profile</h2>
@@ -153,7 +164,7 @@
                   id="companyName"
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Your company name"
-                  :value="auth.company.companyName"
+                  v-model="auth.company.companyName"
                   required
                 />
               </div>
@@ -169,7 +180,7 @@
                   id="address"
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Your address"
-                  :value="auth.company.address"
+                  v-model="auth.company.address"
                   required
                 />
               </div>
@@ -187,7 +198,7 @@
                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                 placeholder="your.email@mail.com"
                 required
-                :value="auth.company.email"
+                v-model="auth.company.email"
               />
             </div>
 
@@ -203,7 +214,7 @@
                 class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                 placeholder="your organization"
                 required
-                :value="auth.company.helpDescription"
+                v-model="auth.company.helpDescription"
               />
             </div>
 
@@ -220,7 +231,7 @@
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Oranisation type"
                   required
-                  :value="auth.company.organizationType"
+                  v-model="auth.company.organizationType"
                 />
               </div>
               <div class="mb-6">
@@ -236,7 +247,7 @@
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Your phone number"
                   required
-                  :value="auth.company.phoneNumber"
+                  v-model="auth.company.phoneNumber"
                 />
               </div>
               <div class="mb-6">
@@ -252,7 +263,7 @@
                   class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                   placeholder="Your website"
                   required
-                  :value="auth.company.webPageUrl"
+                  v-model="auth.company.webPageUrl"
                 />
               </div>
 
@@ -262,7 +273,7 @@
                 Cancel
               </button>
               <button
-                type="submit"
+                  @click="auth.updateCompanyProfile()"
                 class="text-white bg-primary hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
               >
                 Save
@@ -275,8 +286,9 @@
   </main>
 </template>
 <script setup lang="ts">
-import Calendar from 'primevue/calendar';
 import { useAuthStore } from '../stores/useAuth';
+import {computed, onMounted} from "vue";
+import {useSkills} from "@/stores/useSkills";
 const auth = useAuthStore();
 // interface decodedProps {
 //   exp: number;
@@ -284,5 +296,12 @@ const auth = useAuthStore();
 //   sub: string;
 //   role: string;
 // }
+
+const skillsStore = useSkills()
+
+onMounted(() => {
+  auth.fetchUser();
+  skillsStore.fetchSkills();
+});
 
 </script>

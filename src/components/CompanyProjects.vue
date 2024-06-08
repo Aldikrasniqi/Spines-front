@@ -124,6 +124,14 @@
             </div>
           </div>
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+          <!-- @vue-ignore -->
+          <template
+              v-for="project in companyStore.projects"
+              :key="project.id"
+          >          <ProjectsCard :skills="project.skills!" :requirements="project.requirements" :name="project.name" :information="project.information"  :company="auth.company as Company"  :to="{ name: 'project', params: { id: project.id! } }" :type="project.type"></ProjectsCard>
+          </template>
+        </div>
       </div>
     </div>
   </main>
@@ -132,14 +140,19 @@
 <script setup lang="ts">
 import Button from 'primevue/button';
 import { useAuthStore } from '../stores/useAuth';
-const auth = useAuthStore();
-const projectsStore = useProjectsStore();
+
 import { ref, onMounted } from 'vue';
 import Menu from 'primevue/menu';
 import Dialog from 'primevue/dialog';
 import { useProjectsStore } from '../stores/useProjects';
 import { useSkills } from '../stores/useSkills';
+import {useCompaniesStore} from "@/stores/useCompanies";
+import ProjectsCard from "@/components/ProjectsCard.vue";
+import type {Company} from "@/interfaces/company";
 
+const auth = useAuthStore();
+const projectsStore = useProjectsStore();
+const companyStore = useCompaniesStore();
 const skillsStore = useSkills();
 const visible = ref(false);
 
@@ -165,5 +178,6 @@ const toggle = (event: any) => {
 };
 onMounted(() => {
   skillsStore.fetchSkills();
+  companyStore.fetchProjects();
 });
 </script>

@@ -20,6 +20,7 @@
     "jwt-decode": "^4.0.0",
     "pinia": "^2.1.7",
     "primevue": "^3.52.0",
+    "sweetalert2": "^11.11.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "vue-tailwind-datepicker": "^1.7.3"

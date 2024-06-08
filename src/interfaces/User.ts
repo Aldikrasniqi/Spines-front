@@ -9,7 +9,12 @@ export interface User {
   token?: string;
   createdAt?: string;
   updatedAt?: string;
-  skills?: string[];
+  skills?: Skills[];
+}
+
+export interface Skills {
+    id?: string;
+    name?: string;
 }
 
 export interface LoginCredentials {
@@ -26,13 +31,12 @@ export interface RegisterCredentials {
   skills?: string;
 }
 export interface RegisterCompanyCredentials{
-  name?: string;
+  companyName?: string;
   email: string;
   address?: string;
-  phone?: string;
-  organization_type?: string;
-  website?: string;
+  phoneNumber?: string;
+  organizationType?: string;
+  webPageUrl?: string;
   password?: string;
-  password_confirmation?: string;
-  skills?: string;
+  passwordConfirmation?: string;
 }
