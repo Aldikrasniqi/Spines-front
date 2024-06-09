@@ -40,6 +40,14 @@
           />
         </template>
       </div>
+      <div>
+        <Paginator
+          :totalRecords="projects.projects?.totalElements"
+          :rows="projects.projects.size"
+          :currentPage="currentPage"
+          @onPageChange="projects.fetchProjects"
+        />
+      </div>
     </div>
   </main>
 </template>
@@ -53,7 +61,8 @@ import FilterMenu from '@/components/FilterMenu.vue';
 import { useProjectsStore } from '@/stores/useProjects';
 import ProjectsCard from '@/components/ProjectsCard.vue';
 import Button from 'primevue/button';
-
+import Paginator from 'primevue/paginator';
+const currentPage = ref(0);
 const auth = useAuthStore();
 const projects = useProjectsStore();
 const visible = ref(false);
@@ -65,6 +74,13 @@ onMounted(() => {
   projects.fetchProjects();
   console.log(projects.projects);
 });
+
+// pagination
+
+
+
+
+
 </script>
 
 <style scoped></style>
