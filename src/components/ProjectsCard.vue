@@ -28,8 +28,6 @@
     name: string;
   }
   
-
-  
   interface Route {
     name: string;
     params: {

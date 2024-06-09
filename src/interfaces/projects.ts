@@ -10,4 +10,15 @@ export interface Project {
     skills?: Skill[];
     skillsIds: string[];
     content?: string;
+    company?: companyProps;
+}
+
+export interface companyProps{
+    address: string;
+    companyName: string;
+    email: string;
+    helpDescription: string;
+    organizationType: string;
+    phoneNumber: string;
+    webPageUrl: string;
 }
