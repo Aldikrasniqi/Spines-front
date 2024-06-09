@@ -41,12 +41,12 @@
         </template>
       </div>
       <div>
-        <Paginator
+        <!-- <Paginator
           :totalRecords="projects.projects?.totalElements"
           :rows="projects.projects.size"
           :currentPage="currentPage"
           @onPageChange="projects.fetchProjects"
-        />
+        /> -->
       </div>
     </div>
   </main>
