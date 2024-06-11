@@ -10,6 +10,8 @@ export interface Project {
     skills?: Skill[];
     skillsIds: string[];
     company?: companyProps;
+    applied?: boolean
+    applicationCount?: number
 }
 
 export interface ProjectResponse {

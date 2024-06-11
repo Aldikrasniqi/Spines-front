@@ -89,6 +89,7 @@ export const useAuthStore = defineStore('auth', {
           axiosInstance.defaults.headers.common['Authorization'] = token;
           this.loggedIn = true;
           this.isUser = true;
+          this.decodeToken()
 
           await router.push({name: 'Dashboard'})
           return response;
@@ -215,9 +216,11 @@ export const useAuthStore = defineStore('auth', {
         const response = await login(credentials);
         if(response){
           const token = `Bearer ${response.access_token}`
-          localStorage.setItem('token', token);
           axiosInstance.defaults.headers.common['Authorization'] = token;
+          localStorage.setItem('token', token);
           this.loggedIn = true;
+
+          this.decodeToken()
 
           await router.push({path: '/dashboard'})
         } 
@@ -237,6 +240,7 @@ export const useAuthStore = defineStore('auth', {
       this.isUser = false;
       this.loggedIn = false;
       localStorage.removeItem('token');
+      delete axiosInstance.defaults.headers.common['Authorization'];
 
       await router.push({path: '/login'})
     },

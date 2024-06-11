@@ -43,6 +43,15 @@ export const updateProjects = async (id: string, payload: Project) => {
     }
 }
 
+export const applyToProject = async (id: string) => {
+    try {
+        const response = await axiosInstance.post(`${API_URL}volunteers/apply?projectId=${id}`);
+        return response;
+    } catch (error) {
+
+    }
+
+}
 export const fetchProjectsByCompany = async () => {
     try {
         const response = await axiosInstance.get(`${API_URL}companies/me/projects`);

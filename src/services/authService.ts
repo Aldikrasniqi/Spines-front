@@ -15,8 +15,7 @@ export async function login(payload: LoginCredentials) {
       .data;
     return response;
   } catch (error: any) {
-    console.log(error);
-    return error.data.message;
+    throw error;
   }
 }
 

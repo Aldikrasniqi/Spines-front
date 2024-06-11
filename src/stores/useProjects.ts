@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import {
+  applyToProject,
   createProject,
   fetchProject,
   fetchProjectById,
@@ -10,6 +11,7 @@ export const useProjectsStore = defineStore('projects', {
   state: () => ({
     projects: {} as ProjectResponse,
     project: {} as Project | null,
+    projectLoading: false,
     loading: false,
     error: null as string | null,
     projectCredentials: {
@@ -106,6 +108,7 @@ export const useProjectsStore = defineStore('projects', {
     },
     async fetchProjectsById(id: string) {
       try {
+        this.projectLoading = true;
         const response = await fetchProjectById(id);
         if (response) {
           this.project = response.data;
@@ -113,8 +116,22 @@ export const useProjectsStore = defineStore('projects', {
         if (response) {
           this.singleProject = response;
         }
-      } catch (error) {}
+        this.projectLoading = false;
+
+      } catch (error) {
+        this.projectLoading = false;
+      }
     },
+    async apply(){
+        try {
+            const response = await applyToProject(this.project?.id!);
+            if (response) {
+             await this.fetchProjectsById(this.project?.id!);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
   },
   getters: {},
 });
