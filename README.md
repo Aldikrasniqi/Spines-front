@@ -17,7 +17,27 @@ Non-profit organizations, skilled but inexperienced individuals, and community m
 * Strengthens Local Communities: Fosters mutual support and collaboration.
 * Increases Transparency & Accountability: Promotes trust through clear communication and feedback systems.
 * Unlocks New Skills & Services: Access needed services through time credits while learning new skills.
-## Project Setup 
+
+## Setting up the Backend (Java Spring Boot)
+
+### Prerequisites
+
+Before setting up the backend, ensure you have the following installed:
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (version 11 or higher)
+- [Apache Maven](https://maven.apache.org/download.cgi) build automation tool
+
+### Installation
+
+1. Clone the backend repository from Taulant Avdiu GitHub:
+
+```sh
+git clone https://github.com/avdiutaulant/spines-project-backend.git
+```
+2. Clone the front end repository:
+```sh
+git clone https://github.com/Aldikrasniqi/Spines-front.git
+```
+## Frontend Setup in your machine
 ```sh
 cd root-of-your-project
 ```
