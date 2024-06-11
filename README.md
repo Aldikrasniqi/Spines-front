@@ -7,10 +7,7 @@ Non-profit organizations, skilled but inexperienced individuals, and community m
 * Dual Purpose Projects: Non-profits post project listings requiring specific skills and time commitments, categorized as "Volunteer" for traditional volunteering.
 * Flexible Contribution: Users contribute their skills through volunteering, gaining experience.
 * Advanced Matching Algorithm: Matches users with suitable projects and skill exchange opportunities based on skills and interests.
-* Teaching System: Users teach each other skills through 1:1 meetings or video posts.
-* Time Credit System: Users earn time credits by teaching skills and services, which can be used to access teachings from other members.
-* Community Forum: A space for users to connect, share best practices, and build relationships.
-* Reputation System: Encourages positive engagement through user feedback on projects and services.
+
 ## Benefits
 * Empowers Non-Profits: Access skilled volunteers and leverage the time credit system to fill resource gaps.
 * Flexible Volunteering: Volunteer opportunities for various schedules and interests.
