@@ -1,8 +1,8 @@
 <template>
   <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4 mx-auto lg:p-20 p-3">
     <h1 class="text-5xl font-semibold mb-10">Basic Informations</h1>
-    <div class="flex flex-col gap-4">
-      <div>
+    <div class="flex flex-col gap-4 w-full">
+      <div class="">
         <h2 class="text-xl font-semibold text-dark-blue mb-2">
           Project information
         </h2>
@@ -15,7 +15,7 @@
         <h2 class="text-xl font-semibold text-dark-blue mb-2">
           Project requirements
         </h2>
-        <span class="text-gray">
+        <span class="text-gray text-wrap w-1/3">
           {{ textFormatter(projects.project?.requirements) }}
         </span>
       </div>

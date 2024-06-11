@@ -36,7 +36,7 @@
             class="z-10 hidden px-2 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
           >
             <a
-              href="/profile"
+              href="/dashboard"
               class="px-4 py-3 text-sm text-gray-900 dark:text-white"
             >
               <div>

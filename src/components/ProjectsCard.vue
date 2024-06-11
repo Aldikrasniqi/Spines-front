@@ -12,7 +12,7 @@
             v-for="skill in skills"
             :key="skill.id"
           >
-            {{ skill.name }}
+            {{ skill.name ? skill.name : 'No skills' }}
           </button>
         </div>
       </div>

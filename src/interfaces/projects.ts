@@ -9,10 +9,37 @@ export interface Project {
     information: string;
     skills?: Skill[];
     skillsIds: string[];
-    content?: string;
     company?: companyProps;
 }
 
+export interface ProjectResponse {
+    content: Project[];
+    pageable: {
+        sort: {
+            sorted: boolean;
+            unsorted: boolean;
+            empty: boolean;
+        };
+        pageNumber: number;
+        pageSize: number;
+        offset: number;
+        paged: boolean;
+        unpaged: boolean;
+    };
+    last: boolean;
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    number: number;
+    sort: {
+        sorted: boolean;
+        unsorted: boolean;
+        empty: boolean;
+    };
+    numberOfElements: number;
+    first: boolean;
+    empty: boolean;
+}
 export interface companyProps{
     address: string;
     companyName: string;

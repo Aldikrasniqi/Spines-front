@@ -1,6 +1,6 @@
 <template>
-  <div class="rounded-lg p-4 lg:w-2/5 w-full text-white gradient cursor-pointer">
-      <div class="flex flex-col gap-6 p-4">
+  <div class="rounded-lg p-4 lg:w-[310px] w-full text-white gradient cursor-pointer">
+      <div class="flex flex-col gap-6 p-4 w-full">
           <h1 class="text-2xl font-medium">{{ title }}</h1>
           <div class="flex gap-1 w-full">
               <button class="rounded-full px-4 py-2 text-white bg-blue opacity-100">{{ typeOfWork }}</button>

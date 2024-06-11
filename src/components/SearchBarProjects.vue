@@ -23,7 +23,7 @@
       type="search"
       id="default-search"
       class="block w-full p-3 ps-10 text-sm text-gray border border-gray rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue dark:bg-gray dark:border-gray dark:focus:ring-primary dark:focus:border-primary"
-      placeholder="Search Mockups, Logos..."
+      placeholder="Search by project name or company name"
       required
       v-model="projects.search"
     />

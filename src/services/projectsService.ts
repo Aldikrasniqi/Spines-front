@@ -26,9 +26,9 @@ export const createProject = async (payload: Project) => {
     }
 }
 
-export const fetchProject = async () => {
+export const fetchProject = async (page: number, size: number) => {
     try {
-        const response = await axiosInstance.get(`${API_URL}projects`);
+        const response = await axiosInstance.get(`${API_URL}projects?page=${page}&size=${size}`);           
         return response.data;
     } catch (error) {
         

@@ -4,11 +4,11 @@ import {
   fetchProject,
   fetchProjectById,
 } from '../services/projectsService';
-import type { Project } from '@/interfaces/projects';
+import type { Project, ProjectResponse } from '@/interfaces/projects';
 
 export const useProjectsStore = defineStore('projects', {
   state: () => ({
-    projects: [] as Project[],
+    projects: {} as ProjectResponse,
     project: {} as Project | null,
     loading: false,
     error: null as string | null,
@@ -20,17 +20,65 @@ export const useProjectsStore = defineStore('projects', {
       skillsIds: [] as string[],
     } as Project,
     filteredProjects: [] as Project[],
+    createProjectErrors: {
+      name: '',
+      type: '',
+      requirements: '',
+      information: '',
+    } as any,
     searchQuery: '',
     singleProject: {} as any,
     pagination: {
-      page: 1,
-      itemsPerPage: 10,
-      totalItems: 0,
+      total: 0,
+      per_page: 10, // required
+      current_page: 1, // required
+      last_page: 0, // required
+      from: 1,
+      to: 12,
+    },
+    paginationOptions: {
+      offset: 4,
+      previousText: 'Prev',
+      nextText: 'Next',
+      alwaysShowPrevNext: true,
     },
   }),
   actions: {
     async createProjects() {
+      this.createProjectErrors = {
+        name: '',
+        type: '',
+        requirements: '',
+        information: '',
+      };
       const payload = this.projectCredentials;
+      console.log(payload);
+
+      // Validation logic
+      if (payload.name.length < 2) {
+        this.createProjectErrors.name = 'Name minimum length is 2';
+      }
+      if (payload.requirements.length < 20) {
+        this.createProjectErrors.requirements =
+          'Requirements minimum length is 20';
+      }
+      if (payload.information.length < 10) {
+        this.createProjectErrors.information =
+          'Information minimum length is 10';
+      }
+      if (payload.type.length < 20) {
+        this.createProjectErrors.type = 'Type minimum length is 20';
+      }
+
+      // Check if there are any errors
+      Object.keys(this.createProjectErrors).forEach((key) => {
+        console.log(key);
+        if (this.createProjectErrors[key]) {
+          console.log('error');
+          return;
+        }
+      });
+
       try {
         const response = await createProject(payload);
         if (response) {
@@ -38,14 +86,22 @@ export const useProjectsStore = defineStore('projects', {
         }
       } catch (error) {
         console.error(error);
-        // Handle the error appropriately
       }
     },
-    async fetchProjects() {
+    async fetchProjects(page: number, size: number) {
       try {
-        const response = await fetchProject();
+        const response = await fetchProject(page, size);
         console.log(response);
+        this.pagination = {
+          total: response.totalElements,
+          per_page: response.pageable.pageSize,
+          current_page: response.current_page || 1,
+          last_page: response.totalPages,
+          from: response.from,
+          to: response.to,
+        };
         this.projects = response;
+        return response;
       } catch (error) {}
     },
     async fetchProjectsById(id: string) {
@@ -59,16 +115,6 @@ export const useProjectsStore = defineStore('projects', {
         }
       } catch (error) {}
     },
-    filterProjects() {
-      console.log(this.searchQuery);
-      this.filteredProjects = this.projects.filter((project) => {
-        return project.name
-          .toLowerCase()
-          .includes(this.searchQuery.toLowerCase());
-      });
-    },
   },
-  getters: {
-    
-  },
+  getters: {},
 });

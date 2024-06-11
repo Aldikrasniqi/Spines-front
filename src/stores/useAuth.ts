@@ -175,7 +175,6 @@ export const useAuthStore = defineStore('auth', {
           localStorage.setItem('token', token);
           axiosInstance.defaults.headers.common['Authorization'] = token;
           this.loggedIn = true;
-
           await  router.push({name: 'feed'})
         }
         

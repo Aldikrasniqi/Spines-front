@@ -21,6 +21,11 @@
             placeholder="Project name"
             required
           />
+          <FieldError
+              v-if="projectsStore.createProjectErrors.name"
+              class-prop="text-sm text-field-error font-medium"
+              :error="projectsStore.createProjectErrors.name"
+            />
         </div>
         <div class="w-full">
           <label
@@ -51,6 +56,11 @@
             placeholder="Project information"
             required
           />
+          <FieldError
+              v-if="projectsStore.createProjectErrors.information"
+              class-prop="text-sm text-field-error font-medium"
+              :error="projectsStore.createProjectErrors.information"
+            />
         </div>
         <div class="sm:col-span-2">
           <label
@@ -98,6 +108,11 @@
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             placeholder="Your description here"
           ></textarea>
+          <FieldError
+              v-if="projectsStore.createProjectErrors.requirements"
+              class-prop="text-sm text-field-error font-medium"
+              :error="projectsStore.createProjectErrors.requirements"
+            />
         </div>
       </div>
       <div class="flex justify-end gap-2 mt-2">
@@ -110,8 +125,7 @@
         ></Button>
         <Button
           type="submit"
-          label="Save"
-          @click="handleSubmit()"
+          label="Save"  
           class="text-white"
         ></Button>
       </div>
@@ -125,7 +139,7 @@ import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import { useProjectsStore } from '../stores/useProjects';
 import { useSkills } from '../stores/useSkills';
-
+import FieldError from './FieldError.vue';
 const visible = ref(false);
 const projectsStore = useProjectsStore();
 const skillsStore = useSkills();
@@ -134,13 +148,31 @@ const emit = defineEmits(['closeModal']);
 
 const handleSubmit = async () => {
   const response = await projectsStore.createProjects()
-  if(response){
+
+  if(response?.status === 201 || response?.status === 200){
     emit('closeModal');
+    projectsStore.projectCredentials = {
+    name: '',
+    type: '',
+    information: '',
+    requirements: '',
+    skillsIds: [],
+  };
+  }else{
+    console.log('Error creating project');
+    projectsStore.createProjectErrors.requirements = 'Error creating project';
   }
 };
 
 const emitCloseModal = () => {
   emit('closeModal');
+  projectsStore.projectCredentials = {
+    name: '',
+    type: '',
+    information: '',
+    requirements: '',
+    skillsIds: [],
+  };
 };
 
 onMounted(() => {
