@@ -40,7 +40,7 @@
         </template>
       </div>
       </div>
-        <div class="flex w-full mx-auto justify-center p-4">
+        <div class="flex w-full mx-auto justify-center p-4 items-center gap-3">
           <button
             @click="handlePageChange(currentPage - 1)"
             :disabled="isPreviousDisabled"
@@ -48,10 +48,15 @@
           >
             Previous
           </button>
+          <span
+            class="text-sm font-medium text-gray dark:text-gray-400"
+          >
+            Page {{ currentPage + 1 }} of {{ projects.projects.totalPages }}
+          </span>
           <button
             @click="handlePageChange(currentPage + 1)"
             :disabled="isNextDisabled"
-            class="flex items-center justify-center px-3 h-8 ms-3 text-sm font-medium text-gray bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50"
+            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50"
           >
             Next
           </button>
@@ -86,7 +91,6 @@ const handlePageChange = (page: number) => {
   if (page < 0 || page >= projects.projects.totalPages) {
     return;
   }
-
   currentPage.value = page;
   projects.fetchProjects(currentPage.value, 10);
 };

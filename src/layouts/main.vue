@@ -39,9 +39,9 @@
         </nav>
         <UserProfile />
    </div>
-    <div
+  <div
     v-else
-    class="container d-flex justify-content-center align-items-center"
+    class="container d-flex justify-content-center align-items-center mx-auto"
     style="height: 100vh"
   >
     <slot />
