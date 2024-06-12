@@ -88,13 +88,17 @@ const routes: Array<RouteRecordRaw> = [
       requireAuth: true,
     },
     component: () => import('@/views/SingleProjectView.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    meta: {
+      layout: 'auth',
+      menuGroup: 'main',
+      requireAuth: false,
+      },
+    component: () => import('@/views/NotFoundPage.vue'),
   }
-
-  // {
-  //   path: '/:pathMatch(.*)*',
-  //   name: 'not-found',
-  //   component: () => import('../views/NotFoundView.vue'),
-  // },
 ];
 const router = createRouter({
   history: createWebHistory(),
