@@ -131,17 +131,22 @@ const emits = {
 };
 
 const displayedProjects = computed(() => {
-  if (!searchQuery.value.trim()) {
+  const searchTerm = searchQuery.value.trim();
+  const searchTermLowerCase = searchTerm.toLowerCase();
+  const searchTermCapitalized = searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1).toLowerCase();
+
+  if (!searchTerm) {
     return projects.projects.content || [];
   } else {
-    const searchTerm = searchQuery.value.trim().toLowerCase();
     return (projects.projects.content || []).filter(project => {
-      const company = project.company?.toString().toLowerCase();
-      return project.name.toLowerCase().includes(searchTerm) ||
-             (company && company.includes(searchTerm));
+      const companyName = project.company?.companyName?.trim() || '';
+      return companyName.toLowerCase().includes(searchTermLowerCase) || 
+             companyName.includes(searchTermCapitalized);
     });
   }
 });
+
+
 
 const isPreviousDisabled = computed(() => currentPage.value <= 0);
 const isNextDisabled = computed(
