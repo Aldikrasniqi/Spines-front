@@ -26,7 +26,7 @@ import { ref, markRaw } from 'vue';
 const activeField = ref('Public Profile');
 import ProfileEdit from '@/components/ProfileEdit.vue';
 import AccountSettings from '@/components/CompanyProjects.vue';
-import Notifications from '@/components/Notifications.vue';
+import Notifications from '@/components/Applications.vue';
 import ProAccount from '@/components/ProAccount.vue';
 import {useAuthStore} from "@/stores/useAuth";
 

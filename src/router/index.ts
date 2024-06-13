@@ -87,7 +87,7 @@ const routes: Array<RouteRecordRaw> = [
       menuGroup: 'auth',
       requireAuth: true,
     },
-    component: () => import('@/views/SingleProjectView.vue'),
+    component: () => import('@/views/ProjectView.vue'),
   },
   {
     path: '/:pathMatch(.*)*',
