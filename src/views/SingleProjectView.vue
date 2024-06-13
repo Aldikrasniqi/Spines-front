@@ -6,7 +6,8 @@
     <h1 class="text-5xl font-semibold mb-10">{{projects.project?.name}}</h1>
     <div class="flex flex-col gap-4 w-full">
       <div >
-          <span class="text-gray mb-5">
+        <h1 class="text-2xl font-semibold mb-2">{{projects.project?.type}}</h1>
+        <span class="text-gray mb-5">
             <FontAwesomeIcon :icon="faUser"/>
             {{ projects.project?.applicationCount }} Applicants
           </span>
