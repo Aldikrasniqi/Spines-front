@@ -163,7 +163,7 @@
           type="date"
           id="birthDate"
           name="birthDate"
-          class="w-full text-gray border-light-gray bg-white rounded-lg"
+              class="w-full text-gray border-light-gray bg-white rounded-lg"
           showIcon iconDisplay="input"
           placeholder="Birth Date"
           autocomplete="on"

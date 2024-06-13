@@ -38,12 +38,14 @@ export const useProjectsStore = defineStore('projects', {
       from: 1,
       to: 12,
     },
-    paginationOptions: {
-      offset: 4,
-      previousText: 'Prev',
-      nextText: 'Next',
-      alwaysShowPrevNext: true,
-    },
+    search: '',
+    filterParams : ({
+      startDate: '',
+      endDate: '',
+      companyName: '',
+      skillName: [],
+    })
+    
   }),
   actions: {
     async createProjects() {
@@ -90,9 +92,9 @@ export const useProjectsStore = defineStore('projects', {
         console.error(error);
       }
     },
-    async fetchProjects(page: number, size: number) {
+    async fetchProjects(page?: number, size?: number, startDate?: string, endDate?: string, companyName?: string, skillName?: string[]) {
       try {
-        const response = await fetchProject(page, size);
+        const response = await fetchProject(page, size, startDate, endDate, companyName, skillName);
         console.log(response);
         this.pagination = {
           total: response.totalElements,
@@ -104,7 +106,10 @@ export const useProjectsStore = defineStore('projects', {
         };
         this.projects = response;
         return response;
-      } catch (error) {}
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+        throw error; // Re-throw the error after logging it
+      }
     },
     async fetchProjectsById(id: string) {
       try {
