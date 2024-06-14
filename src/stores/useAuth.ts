@@ -31,7 +31,7 @@ export const useAuthStore = defineStore('auth', {
     loginErrors: {} as any,
     registerUserErrors: {} as any,
     registerCompanyErrors: {} as any,
-    isUser: false,
+    isUser: true,
   }),
   getters: {
     // getters to access state
@@ -235,13 +235,16 @@ export const useAuthStore = defineStore('auth', {
       }
     },
     async logout() {
-      this.user = {} as User;
-      this.company = {} as Company
-      this.isUser = false;
-      this.loggedIn = false;
-      localStorage.removeItem('token');
+      // this.user = {} as User;
+      // this.company = {} as Company
+      // this.isUser = false;
+      // this.loggedIn = false;
+      // localStorage.removeItem('token');
+      // delete axiosInstance.defaults.headers.common['Authorization'];
+      // await router.push({path: '/login'})
       delete axiosInstance.defaults.headers.common['Authorization'];
-      await router.push({path: '/login'})
+      localStorage.removeItem('token');
+      window.location.reload();
     },
     decodeToken() {
       if (localStorage.getItem('token')) {

@@ -11,7 +11,6 @@
             <ApplicationCard
                 :applicationId="application.id"
                 :companyName="application.companyName"
-                :projectName="application.projectName"
                 :status="application.status"
                 :applicationDate="application.applicationDate"
                 :volunteer-name="application.volunteer ? `${application.volunteer.firstName} ${application.volunteer.lastName}` : undefined"
@@ -30,5 +29,6 @@ const applications = useApplications();
 
 onMounted(() => {
     applications.fetchApplications();
+    console.log(applications.volunteerApplications)
 })
 </script>

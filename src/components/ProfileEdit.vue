@@ -287,7 +287,7 @@
 </template>
 <script setup lang="ts">
 import { useAuthStore } from '../stores/useAuth';
-import {computed, onMounted} from "vue";
+import {computed, onBeforeMount, onMounted} from "vue";
 import {useSkills} from "@/stores/useSkills";
 const auth = useAuthStore();
 // interface decodedProps {
@@ -299,7 +299,7 @@ const auth = useAuthStore();
 
 const skillsStore = useSkills()
 
-onMounted(() => {
+onBeforeMount(() => {
   auth.fetchUser();
   skillsStore.fetchSkills();
 });
