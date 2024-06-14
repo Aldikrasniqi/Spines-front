@@ -6,13 +6,15 @@
       <div class="flex flex-col gap-6 p-4">
         <h1 class="text-2xl font-medium">{{ name }}</h1>
         <span>Company: {{ company.companyName }}</span>
-        <div class="flex gap-1 w-full">
+        <div class="flex gap-1 w-full flex-wrap">
           <button
             class="rounded-full p-2 text-sm text-white bg-blue opacity-100"
             v-for="skill in skills"
             :key="skill.id"
           >
-            {{ skill.name ? skill.name : 'No skills' }}
+            <span class="w-full">
+              {{ skill.name ? textFormatter(skill.name) : 'No skills' }}
+            </span>
           </button>
         </div>
       </div>
@@ -44,6 +46,11 @@
     company: Company;
     to: Route;
   }>();
+
+
+  const textFormatter = (text: string) => {
+    return text.length > 8 ? text.slice(0, 11) + '...' : text;
+  };
   </script>
   
 <style scoped>
