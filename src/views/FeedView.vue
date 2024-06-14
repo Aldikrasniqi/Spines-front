@@ -35,9 +35,9 @@
             </div>
 
             <CreateProjectDialog
-              v-if="visible"
-              :visible="visible"
-              @closeModal="emits.closeModal"
+                  v-if="visible"
+                  :visible="visible"
+                  @closeModal="emits.closeModal"
             />
 
             <input

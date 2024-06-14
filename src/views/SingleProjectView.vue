@@ -99,11 +99,12 @@
       <div class="self-end mt-6">
         <div class="flex flex-row gap-2">
           <RouterLink
-            to="/feed"
-            class="bg-light-gray rounded-lg text-dark-gray px-4 py-2 hover:bg-dark-gray hover:text-white"
-          >
-            Back 
-          </RouterLink>
+              v-if="currentRoute.name !== 'feed'"  
+              :to="{ name: 'feed' }"
+              class="bg-light-gray rounded-lg text-dark-gray px-4 py-2 hover:bg-dark-gray hover:text-white"
+            >
+              Back to Feed
+            </RouterLink>
           <button
             class="bg-primary rounded-lg text-white px-4 py-2 hover:bg-dark-blue hover:text-white"
             @click="apply"
@@ -119,7 +120,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useProjectsStore } from '../stores/useProjects';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import {useAuthStore} from "@/stores/useAuth";
 import Swal from "sweetalert2";
 import Loading from "@/components/Loading.vue";
@@ -128,6 +129,8 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 const auth = useAuthStore();
 const projects = useProjectsStore();
 const router = useRouter();
+const currentRoute = useRoute();
+
 const id = router.currentRoute.value.params.id as string;
 
 const textFormatter = (text?: string) => {
@@ -135,6 +138,9 @@ const textFormatter = (text?: string) => {
     return text.slice(1, text.length - 1);
   }
 };
+const goBack = () => {
+      router.go(-1); // This navigates back one step in history
+    };
 
 const apply = async () => {
   if(projects.project?.applied){
