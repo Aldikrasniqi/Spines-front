@@ -132,6 +132,7 @@ export const useProjectsStore = defineStore('projects', {
             const response = await applyToProject(this.project?.id!);
             if (response) {
              await this.fetchProjectsById(this.project?.id!);
+             return response;
             }
         } catch (error) {
             console.error(error);

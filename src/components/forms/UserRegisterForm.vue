@@ -230,10 +230,10 @@ defineProps<{
 
 const submitUserRegistationForm = async () => {
   const response = await auth.registerUser(auth.RegisterCredentials);
-  // if (response) {
-  //   if(response.response.status === 409) {
-  //       auth.registerUserErrors.email = 'Email already exists';
-  //   }
-  // }
+  if (response) {
+    if(response.response.status === 409) {
+        auth.registerUserErrors.email = 'Email already exists';
+    }
+  }
 };
 </script>

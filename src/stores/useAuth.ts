@@ -241,7 +241,6 @@ export const useAuthStore = defineStore('auth', {
       this.loggedIn = false;
       localStorage.removeItem('token');
       delete axiosInstance.defaults.headers.common['Authorization'];
-
       await router.push({path: '/login'})
     },
     decodeToken() {

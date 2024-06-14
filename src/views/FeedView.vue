@@ -57,7 +57,7 @@
             />
 
             <button
-              v-if="auth.isUser"
+              v-if="!auth.isUser"
               class="bg-primary rounded-xl text-white w-1/4 p-3"
               @click="visible = true"
             >

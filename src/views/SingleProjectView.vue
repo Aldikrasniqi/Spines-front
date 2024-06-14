@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full  min-h-screen py-1 md:w-2/3 lg:w-3/4 mx-auto lg:p-20 p-3 flex  " v-if="projects.projectLoading">
+  <div class="min-h-screen flex items-center w-full justify-center mb-20" v-if="projects.projectLoading">
     <Loading/>
   </div>
-  <main v-else class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4 mx-auto lg:p-20 p-3">
+  <main v-else class="w-full min-h-screen mx-auto lg:py-14 p-3">
     <h1 class="text-5xl font-semibold mb-10">{{projects.project?.name}}</h1>
     <div class="flex flex-col gap-4 w-full">
       <div >
@@ -104,7 +104,6 @@
           >
             Back 
           </RouterLink>
-          <!-- TODO: Fix the apply with a modal dialog -->
           <button
             class="bg-primary rounded-lg text-white px-4 py-2 hover:bg-dark-blue hover:text-white"
             @click="apply"
@@ -147,7 +146,20 @@ const apply = async () => {
     return;
   }
 
-  await projects.apply()
+  const response = await projects.apply()
+  if (response?.status === 200) {
+    Swal.fire({
+      title: 'Application Successful',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    })
+  } else {
+    Swal.fire({
+      title: 'Application Failed',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
+  }
 };
 
 onMounted(() => {

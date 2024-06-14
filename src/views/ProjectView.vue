@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import {markRaw, onMounted, ref} from "vue";
-import Applications from "@/components/Applications.vue";
-import SingleProjectView from "@/views/SingleProjectView.vue";
-import {useAuthStore} from "@/stores/useAuth";
-import {useApplications} from "@/stores/useApplications";
+import { markRaw, onMounted, ref, computed } from 'vue';
+import Applications from '@/components/Applications.vue';
+import SingleProjectView from '@/views/SingleProjectView.vue';
+import { useAuthStore } from '@/stores/useAuth';
+import { useApplications } from '@/stores/useApplications';
+import TabMenu from 'primevue/tabmenu';
 
 const componentsMap: Record<string, any> = {
-  'Projects': markRaw(SingleProjectView),
-  'Applications': markRaw(Applications),
+  Projects: markRaw(SingleProjectView),
+  Applications: markRaw(Applications),
 };
 
 const activeField = ref('Projects');
-
 const activeComponent = ref(componentsMap['Projects']);
 
 const setActiveField = (field: string) => {
@@ -21,27 +21,36 @@ const setActiveField = (field: string) => {
 
 onMounted(() => {
   useApplications().fetchApplications();
-})
+});
+
+const authStore = useAuthStore();
+const applicationsStore = useApplications();
+
+const items = computed(() => {
+  const tabItems = [{ label: 'Projects', field: 'Projects' }];
+  if (!authStore.isUser && applicationsStore.volunteerApplications) {
+    tabItems.push({ label: 'Applications', field: 'Applications' });
+  }
+  return tabItems;
+});
+
+const handleTabChange = (event: { index: number }) => {
+  const selectedItem = items.value[event.index];
+  if (selectedItem) {
+    setActiveField(selectedItem.field);
+  }
+};
 </script>
 
 <template>
-
-  <div class="w-full px-1 md:w-2/3 lg:w-3/4 mx-auto lg:px-20 ">
-  <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
-    <li class="me-2">
-      <a  @click="setActiveField('Projects')" aria-current="page" class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500">Projects</a>
-    </li>
-    <li v-if="!useAuthStore().isUser && useApplications().volunteerApplications!!" class="me-2">
-      <a @click="setActiveField('Applications')" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Applications</a>
-    </li>
-
-  </ul>
+  <div class="w-full px-1 md:w-2/3 lg:w-3/4 mx-auto">
+    <TabMenu
+      :model="items"
+      :activeItem="items[0]"
+      @tab-change="handleTabChange"
+    />
     <component :is="activeComponent" />
-
   </div>
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -160,7 +160,7 @@ const handleSubmit = async () => {
   };
   }else{
     console.log('Error creating project');
-    projectsStore.createProjectErrors.requirements = 'Error creating project';
+    projectsStore.createProjectErrors.requirements = 'Please fill in all fields with valid data.';
   }
 };
 
@@ -172,6 +172,12 @@ const emitCloseModal = () => {
     information: '',
     requirements: '',
     skillsIds: [],
+  };
+  projectsStore.createProjectErrors = {
+    name: '',
+    type: '',
+    information: '',
+    requirements: '',
   };
 };
 

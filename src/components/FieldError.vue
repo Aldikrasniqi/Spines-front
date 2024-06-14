@@ -1,5 +1,5 @@
 <template>
-    <div :class="classProp" v-if="error">
+    <div :class="classProp">
       {{ error }}
     </div>
   </template>

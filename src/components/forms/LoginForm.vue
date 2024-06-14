@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-5xl font-sans font-bold mb-10 text-light-black">Log in</h1>
-  <form @submit.prevent="submitLogin">
+  <form @submit.prevent="submitLogin" class="">
     <div class="relative flex items-center">
       <input
         type="email"
