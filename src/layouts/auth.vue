@@ -1,4 +1,3 @@
-
 <template>
   <!-- @vue-expect-error -->
   <div class="header__style" v-if="$auth.loggedIn">
@@ -7,54 +6,60 @@
       <nav
         class="flex w-full justify-between items-center py-4 max-w-6xl mx-auto"
       >
-        <div  class="flex w-1/5 items-center justify-between  py-6 max-w-6xl">
+        <div class="flex w-1/5 items-center justify-between py-6 max-w-6xl">
           <button
             @click="goToHome"
             class="font-sans font-extrabold text-blue text-3xl tracking-widest"
-            >SPINES</button
           >
+            SPINES
+          </button>
           <div>
-            <button @click="goToFeed" class="font-medium" >Feed</button>
+            <button @click="goToFeed" class="font-medium">Feed</button>
           </div>
         </div>
 
-        <div>
+        <div class="relative flex items-center">
           <img
             id="avatarButton"
             type="button"
             data-dropdown-toggle="userDropdown"
             data-dropdown-placement="bottom-start"
             class="w-10 h-10 rounded-full cursor-pointer"
-            src="../assets/images/anash copy.jpg"
+            src="https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg"
             alt="User dropdown"
             @click="togleDropDown"
           />
-          
+
           <!-- Dropdown menu -->
           <div
             id="userDropdown"
-            class="z-10 hidden px-2 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+            class="z-10 hidden absolute top-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-gray-700 dark:divide-gray-600 mt-2 right-0 sm:right-auto"
           >
             <a
               href="/dashboard"
-              class="px-4 py-3 text-sm text-gray-900 dark:text-white"
+              
             >
+             <div class="px-4 py-3 text-sm text-gray-900 dark:text-white overflow-hidden">
               <div>
-                <span class="font-medium">{{ auth.isUser ? `${auth.user.firstName} ${auth.user.lastName}` : auth.company.companyName }}</span>
+                <span class="font-medium">{{
+                  auth.isUser
+                    ? `${auth.user.firstName} ${auth.user.lastName}`
+                    : auth.company.companyName
+                }}</span>
               </div>
               <div class="font-medium truncate">
                 {{ auth.isUser ? auth.user.email : auth.company.email }}
               </div>
-              <div>
-                
-              </div>
+             </div>
+
             </a>
             <div class="py-1">
               <button
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 @click="logout"
-                >Sign out</button
               >
+                Sign out
+              </button>
             </div>
           </div>
         </div>
@@ -63,16 +68,16 @@
     </div>
   </div>
   <div class="header__style" v-else>
-        <div class="">
-            <NavigationBar />
-            <slot />
-        </div>
+    <div class="">
+      <NavigationBar />
+      <slot />
     </div>
+  </div>
 </template>
 <script setup lang="ts">
 import NavigationBar from '@/components/NavigationBar.vue';
 import { useAuthStore } from '../stores/useAuth';
-import router from "@/router";
+import router from '@/router';
 const auth = useAuthStore();
 
 const togleDropDown = () => {
@@ -84,12 +89,12 @@ const logout = async () => {
 };
 
 const goToFeed = () => {
-  router.push({name: 'feed'})
-}
+  router.push({ name: 'feed' });
+};
 
 const goToHome = () => {
-  router.push({name: 'home'})
-}
+  router.push({ name: 'home' });
+};
 </script>
 <style scoped>
 .header__style {
