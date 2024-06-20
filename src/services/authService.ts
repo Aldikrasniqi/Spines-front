@@ -1,13 +1,14 @@
 import type {
   LoginCredentials,
   RegisterCompanyCredentials,
-  RegisterCredentials, User,
+  RegisterCredentials,
+  User,
 } from '@/interfaces/User';
 import axiosInstance from '@/plugins/axios';
 import axios from 'axios';
 import { API_URL } from '@/constants/api';
-import type {Company} from "@/interfaces/company";
-import Swal from 'sweetalert2'
+import type { Company } from '@/interfaces/company';
+import Swal from 'sweetalert2';
 
 export async function login(payload: LoginCredentials) {
   try {
@@ -44,8 +45,8 @@ export async function fetchUserData(isUser: boolean) {
     if (isUser) {
       const response = await axiosInstance.get(`${API_URL}volunteers/me`);
       return response;
-    }else{
-      const response = await axiosInstance.get(`${API_URL}companies/me`); 
+    } else {
+      const response = await axiosInstance.get(`${API_URL}companies/me`);
       return response;
     }
   } catch (error) {
@@ -71,43 +72,63 @@ export async function fetchUserById(id: string) {
 
 export async function updateUserProfile(payload: User) {
   try {
-    const response = await axiosInstance.put<User>(`${API_URL}volunteers/me`, payload);
+    const response = await axiosInstance.put<User>(
+      `${API_URL}volunteers/me`,
+      payload
+    );
 
     Swal.fire({
       icon: 'success',
       text: 'Updated profile successfully!',
-    })
+    });
 
     return response.data;
   } catch (error) {
-
     Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Failed to update user!',
-    })
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Failed to update user!',
+    });
 
     return null;
   }
 }
 
-export async function updateCompanyProfile(payload: Company){
-    try {
-        const response = await axiosInstance.put<Company>(`${API_URL}companies/me`, payload);
+export async function updateCompanyProfile(payload: Company) {
+  try {
+    const response = await axiosInstance.put<Company>(
+      `${API_URL}companies/me`,
+      payload
+    );
 
-      Swal.fire({
-        icon: 'success',
-        text: 'Updated profile successfully!',
-      })
+    Swal.fire({
+      icon: 'success',
+      text: 'Updated profile successfully!',
+    });
 
-        return response.data;
-    } catch (error) {
+    return response.data;
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Failed to update user!',
+    });
+  }
+}
 
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Failed to update user!',
-      })
-
-    }
+export async function updateProfilePicture(payload: FormData) {
+  try {
+    const response = await axiosInstance.post(
+      `${API_URL}volunteers/me/profile-picture`,
+      payload,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return null;
+  }
 }

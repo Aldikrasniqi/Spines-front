@@ -12,7 +12,7 @@ import {
   registerCompany,
   fetchUserData,
   updateUserProfile,
-  updateCompanyProfile, logout
+  updateCompanyProfile, logout,  updateProfilePicture,
 } from '@/services/authService';
 import { EMAIL_REGEX, PASSWORD_REGEX, PHONE_REGEX } from '@/constants/regex';
 import axiosInstance from '@/plugins/axios';
@@ -42,6 +42,15 @@ export const useAuthStore = defineStore('auth', {
   },
   actions: {
     // methods to update state
+    async uploadProfileImage(formData: FormData) {
+      try {
+        const response = await updateProfilePicture(formData);
+        return response;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    },
     async registerUser(credentials: RegisterCredentials) {
       this.registerUserErrors = {};
       if (!credentials.firstName) {
