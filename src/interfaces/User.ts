@@ -10,6 +10,7 @@ export interface User {
   createdAt?: string;
   updatedAt?: string;
   skills?: Skills[];
+  profilePicture?: string;
 }
 
 export interface Skills {

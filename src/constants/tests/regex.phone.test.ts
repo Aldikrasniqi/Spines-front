@@ -1,7 +1,7 @@
 import { PHONE_REGEX } from '../regex';
 import { expect, describe, test } from 'vitest';
 
-describe('Regex phone number test', () => {
+describe('Regex phone number test ', () => {
   test('should match phone number', () => {
     const phone = '081234567890';
     expect(phone).toMatch(PHONE_REGEX);
